@@ -1,6 +1,6 @@
 ### Melatonin
 
-Melatonin (formerly SwiftyNetworking) library is a networking library written in Swift that provides a protocol-oriented approach to load network requests. It provides a protocol `Endpoint` to ensure that networking requests are parsed in a generic and type-safe way.
+Melatonin (formerly SwiftyNetworking) library is a networking library written in Swift that provides a protocol-oriented approach to load network requests. It provides a protocol `Endpoint` to ensure that networking requests are parsed in a generic and type-safe way. Earlier changes can be tracked in SwiftyNetworking library which is no longer updated.
 
 #### Endpoint Protocol
 Conformance to `Endpoint` protocol is easy and straighforward. This is how the protocol body looks like:
