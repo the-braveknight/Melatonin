@@ -7,13 +7,27 @@
 
 import Foundation
 
-public struct ContentLength : HeaderKey {
+public struct ContentLength : HeaderKey, HTTPHeader {
     public static let field: String = "Content-Length"
     public typealias Value = Int
+    
+    let contentLength: Value
+    
+    init(_ contentLength: Value) {
+        self.contentLength = contentLength
+    }
+    
+    public var field: String {
+        Self.field
+    }
+    
+    public var value: String {
+        contentLength.headerValue
+    }
 }
 
 extension Int : HeaderValue {
-    public var value: String {
+    public var headerValue: String {
         String(self)
     }
 }

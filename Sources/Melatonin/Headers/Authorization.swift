@@ -7,16 +7,30 @@
 
 import Foundation
 
-public enum Auth: HeaderKey {
+public struct Auth: HeaderKey, HTTPHeader {
     public static let field: String = "Authorization"
     public typealias Value = Authorization
+    
+    let authorization: Value
+    
+    init(_ authorization: Value) {
+        self.authorization = authorization
+    }
+    
+    public var field: String {
+        Self.field
+    }
+    
+    public var value: String {
+        authorization.headerValue
+    }
 }
 
 public enum Authorization : HeaderValue {
     case bearer(token: String)
     case basic(String)
     
-    public var value: String {
+    public var headerValue: String {
         switch self {
         case .bearer(let token):
             return "Bearer \(token)"

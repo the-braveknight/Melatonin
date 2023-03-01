@@ -28,7 +28,7 @@ public extension Endpoint {
     /// All queries marked with @Query property wrapper.
     var mirroredQueries: [URLQueryItem] {
         let mirror = Mirror(reflecting: self)
-        return mirror.children.compactMap { $0.value as? Query }.map(\.urlQueryItem)
+        return mirror.children.compactMap { $0.value as? URLQuery }.map(\.urlQueryItem)
     }
     
     /// All headers marked with @Header property wrapper.

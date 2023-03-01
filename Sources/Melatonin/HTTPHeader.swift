@@ -18,7 +18,7 @@ public protocol HeaderKey {
 }
 
 public protocol HeaderValue {
-    var value: String { get }
+    var headerValue: String { get }
 }
 
 public struct HeaderValues {
@@ -31,7 +31,7 @@ public struct Header<Key: HeaderKey> : HTTPHeader {
     public var wrappedValue: Key.Value
     
     public var value: String {
-        wrappedValue.value
+        wrappedValue.headerValue
     }
     
     public init(wrappedValue: Key.Value, _ keyPath: KeyPath<HeaderValues, Key.Type>) {
@@ -44,3 +44,5 @@ public struct Header<Key: HeaderKey> : HTTPHeader {
         self.wrappedValue = wrappedValue
     }
 }
+
+public typealias HeaderGroup = ArrayBuilder<HTTPHeader>

@@ -28,20 +28,20 @@ Any object conforming to `Endpoint` will automatically get `url` and `request` p
 You can implement the **prepare(request:)** method if you need to modify the request before it is loaded.
 
 #### @Query property wrapper
-The **@Query** property wrapper is used to declare any property that is a URL query. All properties declared with **@Query** inside your endpoint's body will be added to the final url.
+The `@Query` property wrapper is used to declare any property that is a URL query. All properties declared with `@Query` inside your endpoint's body will be added to the final url.
 
 ```swift
 struct APIEndpoint: Endpoint {
     ...
     @Query(name: "name") var name: String? = "the-braveknight"
-    @Query(name: "age") var pageNumber: String? = "2"
+    @Query(name: "age") var pageNumber: Int? = "2"
     ...
 }
 ```
 In the above code, the url query will look like this: `?name=the-braveknight&pageNumber=2`. You can still add multiple queries by directly setting the `queries` property of your endpoint.
 
 #### @Header property wrapper
-Similarly, the **@Header** property wrapper is used to declare headers, which will be added the `URLRequest` before it's loaded. The library contains multiple commonly used HTTP headers and you can also implement your own.
+Similarly, the `@Header`property wrapper is used to declare headers, which will be added the `URLRequest` before it's loaded. The library contains multiple commonly used HTTP headers and you can also implement your own.
 
 ```swift
 struct APIEndpoint: Endpoint {
@@ -52,6 +52,23 @@ struct APIEndpoint: Endpoint {
 }
 ```
 Again, you can still add multiple headers at once by directly setting the `headers` property of your endpoint.
+
+#### @QueryGroup & @HeaderGroup
+These result builders allow you to build arrays of query items and headers respectively. For example, we can use them to build our endpoint's `queries` and `headers` arrays:
+```swift
+struct APIEndpoint: Endpoint {
+    ...
+    @HeaderGroup var headers: [HTTPHeader] {
+        Accept(.json)
+        ContentType(.json)
+    }
+    
+    @QueryGroup var queries: [URLQueryItem] {
+        URLQueryItem(name: "name", value: "the-braveknight")
+        URLQueryItem(name: "age", value: "2")
+    }
+    ...
+}
 
 ### Decoding the response
 In certain cases, for example when the `Response` conforms to `Decodable` and we expect to decode JSON, it would be reasonable to provide default implementation for **parse(data:urlResponse:)** method to handle that automatically.

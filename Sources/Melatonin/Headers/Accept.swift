@@ -7,9 +7,23 @@
 
 import Foundation
 
-public struct Accept: HeaderKey {
+public struct Accept: HeaderKey, HTTPHeader {
     public static let field: String = "Accept"
     public typealias Value = MIMEType
+    
+    public let mimeType: Value
+    
+    init(_ mimeType: Value) {
+        self.mimeType = mimeType
+    }
+    
+    public var field: String {
+        Self.field
+    }
+    
+    public var value: String {
+        mimeType.headerValue
+    }
 }
 
 public enum MIMEType : String, HeaderValue {
@@ -30,7 +44,7 @@ public enum MIMEType : String, HeaderValue {
     case wav = "audio/wav"
     case pdf = "application/pdf"
     
-    public var value: String {
+    public var headerValue: String {
         rawValue
     }
 }
