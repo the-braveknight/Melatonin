@@ -65,7 +65,7 @@ struct APIEndpoint: Endpoint {
     
     @QueryGroup var queries: [URLQuery] {
         Query(name: "name", value: "the-braveknight")
-        Query(name: "age", value: "2")
+        Query(name: "age", value: 2)
     }
     ...
 }
