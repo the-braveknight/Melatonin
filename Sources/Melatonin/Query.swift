@@ -34,6 +34,12 @@ extension String : QueryValue {
     }
 }
 
+extension Bool : QueryValue {
+    public var queryValue: String? {
+        String(self)
+    }
+}
+
 extension Optional : QueryValue where Wrapped : QueryValue {
     public var queryValue: String? {
         self?.queryValue
@@ -53,6 +59,14 @@ public struct Query<Value: QueryValue> : URLQuery {
         self.name = name
         self.wrappedValue = wrappedValue
     }
+    
+    public init<V : QueryValue>(name: String, value: V?) where Value == V? {
+        self.init(wrappedValue: value, name: name)
+    }
+    
+    public init(name: String) where Value == String? {
+        self.init(name: name, value: String?.none)
+    }
 }
 
-public typealias QueryGroup = ArrayBuilder<URLQueryItem>
+public typealias QueryGroup = ArrayBuilder<URLQuery>

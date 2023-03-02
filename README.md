@@ -13,7 +13,7 @@ public protocol Endpoint {
     var port: Int? { get }
     var path: String { get }
     var method: HTTPMethod { get }
-    var queries: [URLQueryItem] { get }
+    var queries: [URLQuery] { get }
     var headers: [HTTPHeader] { get }
     func prepare(request: inout URLRequest)
     func parse(data: Data, urlResponse: URLResponse) throws -> Response
@@ -34,7 +34,7 @@ The `@Query` property wrapper is used to declare any property that is a URL quer
 struct APIEndpoint: Endpoint {
     ...
     @Query(name: "name") var name: String? = "the-braveknight"
-    @Query(name: "age") var pageNumber: Int? = "2"
+    @Query(name: "age") var pageNumber: Int? = 2
     ...
 }
 ```
@@ -63,9 +63,9 @@ struct APIEndpoint: Endpoint {
         ContentType(.json)
     }
     
-    @QueryGroup var queries: [URLQueryItem] {
-        URLQueryItem(name: "name", value: "the-braveknight")
-        URLQueryItem(name: "age", value: "2")
+    @QueryGroup var queries: [URLQuery] {
+        Query(name: "name", value: "the-braveknight")
+        Query(name: "age", value: "2")
     }
     ...
 }

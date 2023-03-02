@@ -25,23 +25,44 @@ public struct HeaderValues {
     private init() {}
 }
 
+extension String : HeaderValue {
+    public var headerValue: String { self }
+}
+
 @propertyWrapper
-public struct Header<Key: HeaderKey> : HTTPHeader {
+public struct Header<Value: HeaderValue> : HTTPHeader {
     public let field: String
-    public var wrappedValue: Key.Value
+    public var wrappedValue: Value
     
     public var value: String {
         wrappedValue.headerValue
     }
     
-    public init(wrappedValue: Key.Value, _ keyPath: KeyPath<HeaderValues, Key.Type>) {
+    public init<Key : HeaderKey>(wrappedValue: Value, key: Key.Type) where Value == Key.Value {
         self.field = Key.field
         self.wrappedValue = wrappedValue
     }
     
-    public init(wrappedValue: Key.Value, key: Key.Type) {
+    public init<Key : HeaderKey>(wrappedValue: Value, _ keyPath: KeyPath<HeaderValues, Key.Type>) where Value == Key.Value {
         self.field = Key.field
         self.wrappedValue = wrappedValue
+    }
+    
+    public init(wrappedValue: Value, field: String) {
+        self.field = field
+        self.wrappedValue = wrappedValue
+    }
+    
+    public init<Key : HeaderKey>(key: Key.Type, value: Value) where Value == Key.Value {
+        self.init(wrappedValue: value, key: Key.self)
+    }
+    
+    public init<Key : HeaderKey>(_ keyPath: KeyPath<HeaderValues, Key.Type>, value: Key.Value) where Value == Key.Value {
+        self.init(wrappedValue: value, keyPath)
+    }
+    
+    public init(field: String, value: Value) {
+        self.init(wrappedValue: value, field: field)
     }
 }
 

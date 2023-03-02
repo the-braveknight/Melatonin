@@ -17,7 +17,7 @@ public protocol Endpoint {
     var port: Int? { get }
     var path: String { get }
     var method: HTTPMethod { get }
-    var queries: [URLQueryItem] { get }
+    var queries: [URLQuery] { get }
     var headers: [HTTPHeader] { get }
     func prepare(request: inout URLRequest)
     func parse(data: Data, urlResponse: URLResponse) throws -> Response
@@ -26,9 +26,9 @@ public protocol Endpoint {
 // - MARK: Additional Properties
 public extension Endpoint {
     /// All queries marked with @Query property wrapper.
-    var mirroredQueries: [URLQueryItem] {
+    var mirroredQueries: [URLQuery] {
         let mirror = Mirror(reflecting: self)
-        return mirror.children.compactMap { $0.value as? URLQuery }.map(\.urlQueryItem)
+        return mirror.children.compactMap { $0.value as? URLQuery }
     }
     
     /// All headers marked with @Header property wrapper.
@@ -43,7 +43,7 @@ public extension Endpoint {
         components.host = host
         components.path = path
         components.port = port
-        components.queryItems = queries + mirroredQueries
+        components.queryItems = (queries + mirroredQueries).map(\.urlQueryItem)
 
         guard let url = components.url else {
             fatalError("Invalid URL components: \(components)")
