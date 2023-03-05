@@ -69,6 +69,7 @@ struct APIEndpoint: Endpoint {
     }
     ...
 }
+```
 
 ### Decoding the response
 In certain cases, for example when the `Response` conforms to `Decodable` and we expect to decode JSON, it would be reasonable to provide default implementation for **parse(data:urlResponse:)** method to handle that automatically.

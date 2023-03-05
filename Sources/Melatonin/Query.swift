@@ -46,6 +46,12 @@ extension Optional : QueryValue where Wrapped : QueryValue {
     }
 }
 
+extension QueryValue where Self : RawRepresentable, RawValue == String {
+    public var queryValue: String? {
+        rawValue
+    }
+}
+
 @propertyWrapper
 public struct Query<Value: QueryValue> : URLQuery {
     public let name: String
