@@ -13,7 +13,7 @@ public struct ContentType: HeaderKey, HTTPHeader {
     
     let mimeType: Value
     
-    init(_ mimeType: Value) {
+    public init(_ mimeType: Value) {
         self.mimeType = mimeType
     }
     

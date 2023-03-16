@@ -13,7 +13,7 @@ public struct Auth: HeaderKey, HTTPHeader {
     
     let authorization: Value
     
-    init(_ authorization: Value) {
+    public init(_ authorization: Value) {
         self.authorization = authorization
     }
     

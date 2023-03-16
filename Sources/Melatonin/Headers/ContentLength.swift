@@ -13,7 +13,7 @@ public struct ContentLength : HeaderKey, HTTPHeader {
     
     let contentLength: Value
     
-    init(_ contentLength: Value) {
+    public init(_ contentLength: Value) {
         self.contentLength = contentLength
     }
     
