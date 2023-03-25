@@ -83,7 +83,7 @@ public extension Endpoint {
     var scheme: Scheme { .https }
     var port: Int? { nil }
     var method : HTTPMethod { .get }
-    var queries: [URLQueryItem] { [] }
+    var queries: [URLQuery] { [] }
     var headers: [HTTPHeader] { [] }
     func prepare(request: inout URLRequest) {}
 }
