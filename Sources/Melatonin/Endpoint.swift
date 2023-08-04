@@ -10,7 +10,7 @@ import Foundation
 // MARK: - Endpoint Protocol
 /// Endpoint protocol
 public protocol Endpoint {
-    associatedtype Response
+    associatedtype Result
     
     var scheme: Scheme { get }
     var host: String { get }
@@ -20,7 +20,7 @@ public protocol Endpoint {
     var queries: [URLQuery] { get }
     var headers: [HTTPHeader] { get }
     func prepare(request: inout URLRequest)
-    func parse(data: Data, urlResponse: URLResponse) throws -> Response
+    func parse(data: Data) throws -> Result
 }
 
 // - MARK: Additional Properties
@@ -88,27 +88,15 @@ public extension Endpoint {
     func prepare(request: inout URLRequest) {}
 }
 
-public extension Endpoint where Response : Decodable {
-    func parse(data: Data, urlResponse: URLResponse) throws -> Response {
+public extension Endpoint where Result : Decodable {
+    func parse(data: Data) throws -> Result {
         let decoder = JSONDecoder()
-        return try decoder.decode(Response.self, from: data)
+        return try decoder.decode(Result.self, from: data)
     }
 }
 
-public extension Endpoint where Response == URLResponse {
-    func parse(data: Data, urlResponse: URLResponse) throws -> Response {
-        return urlResponse
-    }
-}
-
-public extension Endpoint where Response == Data {
-    func parse(data: Data, urlResponse: URLResponse) throws -> Response {
+public extension Endpoint where Result == Data {
+    func parse(data: Data) throws -> Result {
         return data
-    }
-}
-
-public extension Endpoint where Response == (Data, URLResponse) {
-    func parse(data: Data, urlResponse: URLResponse) throws -> Response {
-        return (data, urlResponse)
     }
 }
