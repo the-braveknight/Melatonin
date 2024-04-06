@@ -26,28 +26,41 @@ public struct Accept: HeaderKey, HTTPHeader {
     }
 }
 
-public enum MIMEType : String, HeaderValue {
-    case json = "application/json"
-    case xml = "application/xml"
-    case urlencoded = "application/x-www-form-urlencoded"
-    case text = "text/plain"
-    case html = "text/html"
-    case css = "text/css"
-    case javascript = "text/javascript"
-    case gif = "image/gif"
-    case png = "image/png"
-    case jpeg = "image/jpeg"
-    case bmp = "image/bmp"
-    case webp = "image/webp"
-    case midi = "audio/midi"
-    case mpeg = "audio/mpeg"
-    case wav = "audio/wav"
-    case pdf = "application/pdf"
+public struct MIMEType: ExpressibleByStringLiteral, HeaderValue {
+    public var value: String
+    
+    public init(value: String) {
+        self.value = value
+    }
     
     public var headerValue: String {
-        rawValue
+        value
+    }
+    
+    public init(stringLiteral value: String) {
+        self.init(value: value)
     }
 }
+
+extension MIMEType {
+    static let json: Self = "application/json"
+    static let xml: Self = "application/xml"
+    static let urlencoded: Self = "application/x-www-form-urlencoded"
+    static let text: Self = "text/plain"
+    static let html: Self = "text/html"
+    static let css: Self = "text/css"
+    static let javascript: Self = "text/javascript"
+    static let gif: Self = "image/gif"
+    static let png: Self = "image/png"
+    static let jpeg: Self = "image/jpeg"
+    static let bmp: Self = "image/bmp"
+    static let webp: Self = "image/webp"
+    static let midi: Self = "audio/midi"
+    static let mpeg: Self = "audio/mpeg"
+    static let wav: Self = "audio/wav"
+    static let pdf: Self = "application/pdf"
+}
+
 public extension HeaderValues {
     var accept: Accept.Type {
         Accept.self
