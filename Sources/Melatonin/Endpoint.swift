@@ -25,20 +25,6 @@ public protocol Endpoint {
     func parse(data: Data, urlResponse: URLResponse) throws -> Response
 }
 
-extension Endpoint {
-    var allQueries: [URLQuery] {
-        let mirror = Mirror(reflecting: self)
-        let mirroredQueries = mirror.children.compactMap { $0.value as? URLQuery }
-        return queries + mirroredQueries
-    }
-    
-    var allHeaders: [HTTPHeader] {
-        let mirror = Mirror(reflecting: self)
-        let mirroredHeaders = mirror.children.compactMap { $0.value as? HTTPHeader }
-        return headers + mirroredHeaders
-    }
-}
-
 // MARK: - Default Implementation
 public extension Endpoint {
     var scheme: Scheme { .https }
@@ -52,6 +38,18 @@ public extension Endpoint {
 
 // - MARK: Additional Properties
 public extension Endpoint {
+    var allQueries: [URLQuery] {
+        let mirror = Mirror(reflecting: self)
+        let mirroredQueries = mirror.children.compactMap { $0.value as? URLQuery }
+        return queries + mirroredQueries
+    }
+    
+    var allHeaders: [HTTPHeader] {
+        let mirror = Mirror(reflecting: self)
+        let mirroredHeaders = mirror.children.compactMap { $0.value as? HTTPHeader }
+        return headers + mirroredHeaders
+    }
+    
     var url: URL {
         var components = URLComponents()
         components.scheme = scheme.rawValue

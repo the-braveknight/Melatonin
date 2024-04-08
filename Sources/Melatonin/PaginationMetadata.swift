@@ -14,6 +14,32 @@ public protocol PaginationMetadata {
     var currentPage: Int { get }
 }
 
+public extension PaginationMetadata {
+    var firstPage: Int {
+        return 1
+    }
+    
+    var lastPage: Int {
+        return totalPages
+    }
+    
+    var nextPage: Int? {
+        guard currentPage < totalPages else {
+            return nil
+        }
+        
+        return currentPage + 1
+    }
+    
+    var previousPage: Int? {
+        guard currentPage > 1 else {
+            return nil
+        }
+        
+        return currentPage - 1
+    }
+}
+
 public struct Pagination: PaginationMetadata {
     public let totalCount: Int
     public let totalPages: Int
