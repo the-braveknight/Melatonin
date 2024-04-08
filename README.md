@@ -1,26 +1,28 @@
 ### Melatonin
 
-Melatonin (formerly SwiftyNetworking) library is a networking library written in Swift that provides a protocol-oriented approach to load network requests. It provides a protocol `Endpoint` to ensure that networking requests are parsed in a generic and type-safe way. Earlier changes can be tracked in SwiftyNetworking library which is no longer updated.
+Melatonin is a networking library written in Swift that provides a protocol-oriented approach to load network requests. It provides a protocol `Endpoint` to ensure that networking requests are parsed in a generic and type-safe way.
 
 #### Endpoint Protocol
 Conformance to `Endpoint` protocol is easy and straighforward. This is how the protocol body looks like:
 ```swift
 public protocol Endpoint {
     associatedtype Response
+    associatedtype Body: HTTPBody = Empty
     
     var scheme: Scheme { get }
     var host: String { get }
     var port: Int? { get }
     var path: String { get }
     var method: HTTPMethod { get }
-    var queries: [URLQuery] { get }
-    var headers: [HTTPHeader] { get }
+    @QueryGroup var queries: [URLQuery] { get }
+    @HeaderGroup var headers: [HTTPHeader] { get }
+    var body: Body { get }
     func prepare(request: inout URLRequest)
     func parse(data: Data, urlResponse: URLResponse) throws -> Response
 }
 
 ```
-The library includes default implementations for some of the required variables and functions for convenience.
+The library includes default implementations for some of the required variables and functions for convenience, any of which can be overriden by providing a custom implementation for it inside your endpoint object.
 
 ### Constructing the URLRequest
 Any object conforming to `Endpoint` will automatically get `url` and `request` properites which will be used by `URLSession` to load the request.
@@ -34,14 +36,14 @@ The `@Query` property wrapper is used to declare any property that is a URL quer
 struct APIEndpoint: Endpoint {
     ...
     @Query(name: "name") var name: String? = "the-braveknight"
-    @Query(name: "age") var pageNumber: Int? = 2
+    @Query(name: "age") var pageNumber: Int = 2
     ...
 }
 ```
 In the above code, the url query will look like this: `?name=the-braveknight&pageNumber=2`. You can still add multiple queries by directly setting the `queries` property of your endpoint.
 
 #### @Header property wrapper
-Similarly, the `@Header`property wrapper is used to declare headers, which will be added the `URLRequest` before it's loaded. The library contains multiple commonly used HTTP headers and you can also implement your own.
+Similarly, the `@Header`property wrapper is used to declare headers, which will be added the `URLRequest` before it is loaded. The library contains multiple commonly used HTTP headers and you can also implement your own.
 
 ```swift
 struct APIEndpoint: Endpoint {
@@ -54,16 +56,16 @@ struct APIEndpoint: Endpoint {
 Again, you can still add multiple headers at once by directly setting the `headers` property of your endpoint.
 
 #### @QueryGroup & @HeaderGroup
-These result builders allow you to build arrays of query items and headers respectively. For example, we can use them to build our endpoint's `queries` and `headers` arrays:
+These result builders allow you to build arrays of query items and headers respectively. Both `queries` and `headers` array are marked with `@QueryGroup` and `@HeaderGroup` in the Endpoint protocol declaration by default. For example, here is how we can use them to build our endpoint's `queries` and `headers` arrays in a declarative way:
 ```swift
 struct APIEndpoint: Endpoint {
     ...
-    @HeaderGroup var headers: [HTTPHeader] {
+    var headers: [HTTPHeader] {
         Accept(.json)
         ContentType(.json)
     }
     
-    @QueryGroup var queries: [URLQuery] {
+    var queries: [URLQuery] {
         Query(name: "name", value: "the-braveknight")
         Query(name: "age", value: 2)
     }
@@ -99,6 +101,7 @@ A custom Swift struct that can contain this data would look like this:
 struct Person : Decodable {
     let name: String
     let age: Int
+    let count: Int
 }
 ```
 Finally, here is how our endpoint will look like:
@@ -135,7 +138,7 @@ URLSession.shared.load(.estimatedAge(forName: "Zaid")) { result in
 ### Combine
 Melatonin supports loading endpoints using `Combine` framework.
 ```swift
-let subscription: AnyCancellable = URLSession.shared.load(.estimatedAge(forName: "Zaid"))
+let subscription: AnyCancellable = URLSession.shared.publisher(for: .estimatedAge(forName: "Zaid"))
     .sink { completion in
         // Handle errors
     } receiveValue: { person in
