@@ -11,7 +11,7 @@ import Foundation
 /// Endpoint protocol
 public protocol Endpoint {
     associatedtype Response
-    associatedtype Body: HTTPBody = Never
+    associatedtype Body: HTTPBody = Empty
     
     var scheme: Scheme { get }
     var host: String { get }
@@ -20,7 +20,7 @@ public protocol Endpoint {
     var method: HTTPMethod { get }
     @QueryGroup var queries: [URLQuery] { get }
     @HeaderGroup var headers: [HTTPHeader] { get }
-    var body: Body? { get }
+    var body: Body { get }
     func prepare(request: inout URLRequest)
     func parse(data: Data, urlResponse: URLResponse) throws -> Response
 }
@@ -32,7 +32,7 @@ public extension Endpoint {
     var method : HTTPMethod { .get }
     var queries: [URLQuery] { [] }
     var headers: [HTTPHeader] { [] }
-    var body: Body? { nil }
+    var body: some HTTPBody { Empty() }
     func prepare(request: inout URLRequest) {}
 }
 
@@ -70,7 +70,7 @@ public extension Endpoint {
         
         allHeaders.forEach { $0.build(&request) }
         method.build(&request)
-        body?.build(&request)
+        body.build(&request)
         prepare(request: &request)
         
         return request

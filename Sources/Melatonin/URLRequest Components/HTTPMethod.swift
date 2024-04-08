@@ -23,7 +23,7 @@ public struct HTTPMethod: URLRequestComponent, ExpressibleByStringLiteral {
     }
 }
 
-extension HTTPMethod {
+public extension HTTPMethod {
     static let get: Self = "GET"
     static let post: Self = "POST"
     static let put: Self = "PUT"

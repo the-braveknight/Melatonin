@@ -17,7 +17,7 @@ extension HTTPBody {
     }
 }
 
-extension Never: HTTPBody {
+public struct Empty: HTTPBody {
     public var data: Data? { nil }
 }
 
