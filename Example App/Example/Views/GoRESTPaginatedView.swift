@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct GoRESTPaginatedView<Endpoint: GoRESTPaginatedEndpoint, Row: View>: View where Endpoint.Record: Identifiable {
-    private let service = Service()
-    
     let endpoint: (_ page: Int, _ query: String?) -> Endpoint
     @ViewBuilder var row: (Endpoint.Record) -> Row
     
@@ -18,6 +16,8 @@ struct GoRESTPaginatedView<Endpoint: GoRESTPaginatedEndpoint, Row: View>: View w
     @State private var currentResponse: Endpoint.Response? = nil
     @State private var loadingState: LoadingState = .pending
     
+    @Environment(\.service) private var service: Service
+        
     private enum LoadingState {
         case pending, loading, loaded
     }

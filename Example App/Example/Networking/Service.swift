@@ -5,25 +5,31 @@
 //  Created by Zaid Rahhawi on 4/8/24.
 //
 
-import Foundation
+import SwiftUI
 import Melatonin
 
 actor Service {
-    let session: URLSession
-    
-    init(session: URLSession) {
-        self.session = session
-    }
-    
-    init(configuration: URLSessionConfiguration) {
-        self.session = URLSession(configuration: configuration)
-    }
-    
-    init() {
-        self.init(session: .shared)
-    }
+    private let session: URLSession = {
+        let urlCache = URLCache(memoryCapacity: 20 * 1024 * 1024, diskCapacity: 100 * 1024 * 1024, diskPath: "ClientCache")
+        let configuration = URLSessionConfiguration.default
+        configuration.requestCachePolicy = .returnCacheDataElseLoad
+        configuration.urlCache = urlCache
+        let session = URLSession(configuration: configuration)
+        return session
+    }()
     
     func load<E: Endpoint>(_ endpoint: E) async throws -> E.Response {
         try await session.load(endpoint)
+    }
+}
+
+private struct ServiceKey: EnvironmentKey {
+    static let defaultValue = Service()
+}
+
+extension EnvironmentValues {
+    var service: Service {
+        get { self[ServiceKey.self] }
+        set { self[ServiceKey.self] = newValue }
     }
 }

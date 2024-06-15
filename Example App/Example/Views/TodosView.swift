@@ -8,20 +8,23 @@
 import SwiftUI
 
 struct TodoRow: View {
-    let todo: Todo
+    @Bindable var todo: Todo
     
     var body: some View {
         HStack {
-            Image(systemName: todo.status == .completed ? "checkmark.circle.fill" : "circle")
+            Toggle("", isOn: $todo.isCompleted)
+                .toggleStyle(.checkmark)
+                .font(.title2)
+                .foregroundStyle(.blue)
+            
             Text(todo.title)
+                .lineLimit(2)
         }
         .font(.headline)
     }
 }
 
-struct TodosView: View {
-    @State private var status: Todo.Status? = nil
-    
+struct TodosView: View {    
     var body: some View {
         GoRESTPaginatedView { page, query in
             TodosEndpoint(page: page, recordsPerPage: 10, title: query)

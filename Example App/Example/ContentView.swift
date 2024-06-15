@@ -34,7 +34,6 @@ struct ContentView: View {
             .tabItem { Label("Todos", systemImage: "list.bullet") }
             .tag(Tab.todos)
         }
-        
     }
 }
 

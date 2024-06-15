@@ -25,6 +25,7 @@
 		96C0053F2BC474F700134D6C /* PostsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C005352BC474F700134D6C /* PostsView.swift */; };
 		96C005402BC474F700134D6C /* TodosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C005362BC474F700134D6C /* TodosView.swift */; };
 		96C005412BC474F700134D6C /* UsersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C005372BC474F700134D6C /* UsersView.swift */; };
+		96C8E7FC2C1E515500FC5D28 /* CheckmarkToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C8E7FB2C1E515000FC5D28 /* CheckmarkToggleStyle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		96C005352BC474F700134D6C /* PostsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostsView.swift; sourceTree = "<group>"; };
 		96C005362BC474F700134D6C /* TodosView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodosView.swift; sourceTree = "<group>"; };
 		96C005372BC474F700134D6C /* UsersView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersView.swift; sourceTree = "<group>"; };
+		96C8E7FB2C1E515000FC5D28 /* CheckmarkToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckmarkToggleStyle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +94,7 @@
 			children = (
 				96C0051E2BC4749C00134D6C /* ExampleApp.swift */,
 				96C005202BC4749C00134D6C /* ContentView.swift */,
+				966F23022BC48B4000DD8990 /* Models */,
 				96C005332BC474F700134D6C /* Networking */,
 				96C005382BC474F700134D6C /* Views */,
 				96C005222BC4749D00134D6C /* Assets.xcassets */,
@@ -124,9 +127,8 @@
 		96C005332BC474F700134D6C /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				966F23022BC48B4000DD8990 /* Models */,
-				96C005312BC474F700134D6C /* GoREST API */,
 				96C005322BC474F700134D6C /* Service.swift */,
+				96C005312BC474F700134D6C /* GoREST API */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -138,8 +140,17 @@
 				96C005352BC474F700134D6C /* PostsView.swift */,
 				96C005362BC474F700134D6C /* TodosView.swift */,
 				96C005372BC474F700134D6C /* UsersView.swift */,
+				96C8E7FD2C1E516200FC5D28 /* Helpers */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		96C8E7FD2C1E516200FC5D28 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				96C8E7FB2C1E515000FC5D28 /* CheckmarkToggleStyle.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,6 +230,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				966F230A2BC48B9700DD8990 /* UserEndpoint.swift in Sources */,
+				96C8E7FC2C1E515500FC5D28 /* CheckmarkToggleStyle.swift in Sources */,
 				96C005402BC474F700134D6C /* TodosView.swift in Sources */,
 				96C0053E2BC474F700134D6C /* GoRESTPaginatedView.swift in Sources */,
 				96C0053C2BC474F700134D6C /* UsersEndpoint.swift in Sources */,
