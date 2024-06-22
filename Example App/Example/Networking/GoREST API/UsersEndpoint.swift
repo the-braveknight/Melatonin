@@ -19,7 +19,7 @@ struct UsersEndpoint: GoRESTPaginatedEndpoint {
 }
 
 extension Endpoint where Self == UsersEndpoint {
-    static func users(page: Int = 1, recrodsPerPage: Int = 20, matching name: String? = nil) -> Self {
+    static func users(page: Int = 1, recrodsPerPage: Int = 10, matching name: String? = nil) -> Self {
         Self(page: page, recordsPerPage: recrodsPerPage, name: name)
     }
 }

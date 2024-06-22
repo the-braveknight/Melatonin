@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		96468E932C27373200151E84 /* TodoRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96468E922C27372F00151E84 /* TodoRow.swift */; };
+		96468E962C273A6300151E84 /* UserRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96468E952C273A5F00151E84 /* UserRow.swift */; };
+		96468E992C273B9D00151E84 /* PostRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96468E982C273B9C00151E84 /* PostRow.swift */; };
+		96468E9B2C273CC500151E84 /* HandleErrorAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96468E9A2C273CC100151E84 /* HandleErrorAction.swift */; };
 		966F23012BC47E0900DD8990 /* Melatonin in Frameworks */ = {isa = PBXBuildFile; productRef = 966F23002BC47E0900DD8990 /* Melatonin */; };
 		966F23042BC48B4A00DD8990 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966F23032BC48B4A00DD8990 /* User.swift */; };
 		966F23062BC48B5A00DD8990 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966F23052BC48B5A00DD8990 /* Post.swift */; };
@@ -21,7 +25,6 @@
 		96C0053B2BC474F700134D6C /* TodosEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C0052F2BC474F700134D6C /* TodosEndpoint.swift */; };
 		96C0053C2BC474F700134D6C /* UsersEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C005302BC474F700134D6C /* UsersEndpoint.swift */; };
 		96C0053D2BC474F700134D6C /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C005322BC474F700134D6C /* Service.swift */; };
-		96C0053E2BC474F700134D6C /* GoRESTPaginatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C005342BC474F700134D6C /* GoRESTPaginatedView.swift */; };
 		96C0053F2BC474F700134D6C /* PostsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C005352BC474F700134D6C /* PostsView.swift */; };
 		96C005402BC474F700134D6C /* TodosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C005362BC474F700134D6C /* TodosView.swift */; };
 		96C005412BC474F700134D6C /* UsersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C005372BC474F700134D6C /* UsersView.swift */; };
@@ -29,6 +32,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		96468E922C27372F00151E84 /* TodoRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoRow.swift; sourceTree = "<group>"; };
+		96468E952C273A5F00151E84 /* UserRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRow.swift; sourceTree = "<group>"; };
+		96468E982C273B9C00151E84 /* PostRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRow.swift; sourceTree = "<group>"; };
+		96468E9A2C273CC100151E84 /* HandleErrorAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandleErrorAction.swift; sourceTree = "<group>"; };
 		966F23032BC48B4A00DD8990 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		966F23052BC48B5A00DD8990 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		966F23072BC48B6900DD8990 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
@@ -44,7 +51,6 @@
 		96C0052F2BC474F700134D6C /* TodosEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodosEndpoint.swift; sourceTree = "<group>"; };
 		96C005302BC474F700134D6C /* UsersEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersEndpoint.swift; sourceTree = "<group>"; };
 		96C005322BC474F700134D6C /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
-		96C005342BC474F700134D6C /* GoRESTPaginatedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoRESTPaginatedView.swift; sourceTree = "<group>"; };
 		96C005352BC474F700134D6C /* PostsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostsView.swift; sourceTree = "<group>"; };
 		96C005362BC474F700134D6C /* TodosView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodosView.swift; sourceTree = "<group>"; };
 		96C005372BC474F700134D6C /* UsersView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersView.swift; sourceTree = "<group>"; };
@@ -63,6 +69,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		96468E912C27371100151E84 /* Todos */ = {
+			isa = PBXGroup;
+			children = (
+				96C005362BC474F700134D6C /* TodosView.swift */,
+				96468E922C27372F00151E84 /* TodoRow.swift */,
+			);
+			path = Todos;
+			sourceTree = "<group>";
+		};
+		96468E942C273A5900151E84 /* Users */ = {
+			isa = PBXGroup;
+			children = (
+				96C005372BC474F700134D6C /* UsersView.swift */,
+				96468E952C273A5F00151E84 /* UserRow.swift */,
+			);
+			path = Users;
+			sourceTree = "<group>";
+		};
+		96468E972C273B9700151E84 /* Posts */ = {
+			isa = PBXGroup;
+			children = (
+				96C005352BC474F700134D6C /* PostsView.swift */,
+				96468E982C273B9C00151E84 /* PostRow.swift */,
+			);
+			path = Posts;
+			sourceTree = "<group>";
+		};
+		96468E9C2C2740A400151E84 /* Environment Actions */ = {
+			isa = PBXGroup;
+			children = (
+				96468E9A2C273CC100151E84 /* HandleErrorAction.swift */,
+			);
+			path = "Environment Actions";
+			sourceTree = "<group>";
+		};
 		966F23022BC48B4000DD8990 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -94,6 +135,7 @@
 			children = (
 				96C0051E2BC4749C00134D6C /* ExampleApp.swift */,
 				96C005202BC4749C00134D6C /* ContentView.swift */,
+				96468E9C2C2740A400151E84 /* Environment Actions */,
 				966F23022BC48B4000DD8990 /* Models */,
 				96C005332BC474F700134D6C /* Networking */,
 				96C005382BC474F700134D6C /* Views */,
@@ -136,10 +178,9 @@
 		96C005382BC474F700134D6C /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				96C005342BC474F700134D6C /* GoRESTPaginatedView.swift */,
-				96C005352BC474F700134D6C /* PostsView.swift */,
-				96C005362BC474F700134D6C /* TodosView.swift */,
-				96C005372BC474F700134D6C /* UsersView.swift */,
+				96468E972C273B9700151E84 /* Posts */,
+				96468E912C27371100151E84 /* Todos */,
+				96468E942C273A5900151E84 /* Users */,
 				96C8E7FD2C1E516200FC5D28 /* Helpers */,
 			);
 			path = Views;
@@ -232,9 +273,9 @@
 				966F230A2BC48B9700DD8990 /* UserEndpoint.swift in Sources */,
 				96C8E7FC2C1E515500FC5D28 /* CheckmarkToggleStyle.swift in Sources */,
 				96C005402BC474F700134D6C /* TodosView.swift in Sources */,
-				96C0053E2BC474F700134D6C /* GoRESTPaginatedView.swift in Sources */,
 				96C0053C2BC474F700134D6C /* UsersEndpoint.swift in Sources */,
 				96C0053D2BC474F700134D6C /* Service.swift in Sources */,
+				96468E9B2C273CC500151E84 /* HandleErrorAction.swift in Sources */,
 				966F23062BC48B5A00DD8990 /* Post.swift in Sources */,
 				96C005212BC4749C00134D6C /* ContentView.swift in Sources */,
 				96C0053A2BC474F700134D6C /* PostsEndpoint.swift in Sources */,
@@ -242,7 +283,10 @@
 				96C005392BC474F700134D6C /* GoRESTEndpoint.swift in Sources */,
 				96C0053B2BC474F700134D6C /* TodosEndpoint.swift in Sources */,
 				966F23042BC48B4A00DD8990 /* User.swift in Sources */,
+				96468E932C27373200151E84 /* TodoRow.swift in Sources */,
 				96C0051F2BC4749C00134D6C /* ExampleApp.swift in Sources */,
+				96468E992C273B9D00151E84 /* PostRow.swift in Sources */,
+				96468E962C273A6300151E84 /* UserRow.swift in Sources */,
 				96C005412BC474F700134D6C /* UsersView.swift in Sources */,
 				96C0053F2BC474F700134D6C /* PostsView.swift in Sources */,
 			);

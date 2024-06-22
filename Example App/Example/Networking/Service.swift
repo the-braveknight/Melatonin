@@ -10,9 +10,9 @@ import Melatonin
 
 actor Service {
     private let session: URLSession = {
-        let urlCache = URLCache(memoryCapacity: 20 * 1024 * 1024, diskCapacity: 100 * 1024 * 1024, diskPath: "ClientCache")
         let configuration = URLSessionConfiguration.default
-        configuration.requestCachePolicy = .returnCacheDataElseLoad
+        configuration.requestCachePolicy = .useProtocolCachePolicy
+        let urlCache = URLCache(memoryCapacity: 20 * 1024 * 1024, diskCapacity: 100 * 1024 * 1024, diskPath: "ClientCache")
         configuration.urlCache = urlCache
         let session = URLSession(configuration: configuration)
         return session
