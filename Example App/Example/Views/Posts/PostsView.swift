@@ -11,18 +11,16 @@ import Melatonin
 
 struct PostsView: View {
     // MARK: - SwiftData
-    @Query(sort: \Post.id, order: .reverse) private var posts: [Post]
+    @Query(sort: \Post.id, order: .reverse, animation: .default) private var posts: [Post]
     @Environment(\.modelContext) private var modelContext: ModelContext
     
-    // MARK: - Service
+    // MARK: - Environment Variables
     @Environment(\.service) private var service: Service
-    @State private var isLoading: Bool = false
+    @Environment(\.handleError) private var handle
     
     // MARK: - Pagination
     @State private var pagination: Pagination? = nil
-    
-    // MARK: - Environment Variables
-    @Environment(\.handleError) var handle
+    @State private var isLoading: Bool = false
     
     var body: some View {
         List {
@@ -30,44 +28,37 @@ struct PostsView: View {
                 PostRow(post: post)
                     .task {
                         if post.id == posts.last?.id {
-                            await loadMore()
+                            await loadMorePosts()
                         }
                     }
             }
         }
         .navigationTitle("Posts")
         .task {
-            await loadPosts()
+            await loadInitialPosts()
         }
         .refreshable {
-            await loadPosts()
+            await loadInitialPosts()
         }
     }
     
-    private func loadPosts() async {
-        guard !isLoading else { return }
-        
-        isLoading = true
-        defer { isLoading = false }
-        
-        do {
-            let response = try await service.load(.posts())
-            try handle(response: response)
-        } catch {
-            handle(error)
-        }
+    private func loadInitialPosts() async {
+        await loadPosts(page: 1)
     }
     
-    private func loadMore() async {
-        guard !isLoading else { return }
-        
+    private func loadMorePosts() async {
         guard let nextPage = pagination?.nextPage else { return }
+        await loadPosts(page: nextPage)
+    }
+    
+    private func loadPosts(page: Int) async {
+        guard !isLoading else { return }
         
         isLoading = true
         defer { isLoading = false }
         
         do {
-            let response = try await service.load(.posts(page: nextPage))
+            let response = try await service.load(.posts(page: page))
             try handle(response: response)
         } catch {
             handle(error)

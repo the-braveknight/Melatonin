@@ -12,9 +12,6 @@ import SwiftData
 struct ExampleApp: App {
     private let service = Service()
     
-    @State private var error: Error? = nil
-    @State private var showError: Bool = false
-    
     var body: some Scene {
         WindowGroup {
             ContentView()

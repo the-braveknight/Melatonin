@@ -134,7 +134,6 @@
 			isa = PBXGroup;
 			children = (
 				96C0051E2BC4749C00134D6C /* ExampleApp.swift */,
-				96C005202BC4749C00134D6C /* ContentView.swift */,
 				96468E9C2C2740A400151E84 /* Environment Actions */,
 				966F23022BC48B4000DD8990 /* Models */,
 				96C005332BC474F700134D6C /* Networking */,
@@ -178,6 +177,7 @@
 		96C005382BC474F700134D6C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				96C005202BC4749C00134D6C /* ContentView.swift */,
 				96468E972C273B9700151E84 /* Posts */,
 				96468E912C27371100151E84 /* Todos */,
 				96468E942C273A5900151E84 /* Users */,

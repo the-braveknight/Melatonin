@@ -11,18 +11,16 @@ import Melatonin
 
 struct TodosView: View {
     // MARK: - SwiftData
-    @Query(sort: \Todo.id, order: .reverse) private var todos: [Todo]
+    @Query(sort: \Todo.id, order: .reverse, animation: .default) private var todos: [Todo]
     @Environment(\.modelContext) private var modelContext: ModelContext
     
-    // MARK: - Service
+    // MARK: - Environment Variables
     @Environment(\.service) private var service: Service
-    @State private var isLoading: Bool = false
+    @Environment(\.handleError) private var handle
     
     // MARK: - Pagination
     @State private var pagination: Pagination? = nil
-    
-    // MARK: - Environment Variables
-    @Environment(\.handleError) var handle
+    @State private var isLoading: Bool = false
     
     var body: some View {
         List {
@@ -30,44 +28,37 @@ struct TodosView: View {
                 TodoRow(todo: todo)
                     .task {
                         if todo.id == todos.last?.id {
-                            await loadMore()
+                            await loadMoreTodos()
                         }
                     }
             }
         }
         .navigationTitle("Todos")
         .task {
-            await loadTodos()
+            await loadInitialTodos()
         }
         .refreshable {
-            await loadTodos()
+            await loadInitialTodos()
         }
     }
     
-    private func loadTodos() async {
-        guard !isLoading else { return }
-        
-        isLoading = true
-        defer { isLoading = false }
-        
-        do {
-            let response = try await service.load(.todos())
-            try handle(response: response)
-        } catch {
-            handle(error)
-        }
+    private func loadInitialTodos() async {
+        await loadTodos(page: 1)
     }
     
-    private func loadMore() async {
-        guard !isLoading else { return }
-        
+    private func loadMoreTodos() async {
         guard let nextPage = pagination?.nextPage else { return }
+        await loadTodos(page: nextPage)
+    }
+    
+    private func loadTodos(page: Int) async {
+        guard !isLoading else { return }
         
         isLoading = true
         defer { isLoading = false }
         
         do {
-            let response = try await service.load(.todos(page: nextPage))
+            let response = try await service.load(.todos(page: page))
             try handle(response: response)
         } catch {
             handle(error)

@@ -11,18 +11,16 @@ import Melatonin
 
 struct UsersView: View {
     // MARK: - SwiftData
-    @Query(sort: \User.id, order: .reverse) private var users: [User]
+    @Query(sort: \User.id, order: .reverse, animation: .default) private var users: [User]
     @Environment(\.modelContext) private var modelContext: ModelContext
     
-    // MARK: - Service
+    // MARK: - Environment Variables
     @Environment(\.service) private var service: Service
-    @State private var isLoading: Bool = false
+    @Environment(\.handleError) private var handle
     
     // MARK: - Pagination
     @State private var pagination: Pagination? = nil
-    
-    // MARK: - Environment Variables
-    @Environment(\.handleError) var handle
+    @State private var isLoading: Bool = false
     
     var body: some View {
         List {
@@ -30,44 +28,37 @@ struct UsersView: View {
                 UserRow(user: user)
                     .task {
                         if user.id == users.last?.id {
-                            await loadMore()
+                            await loadMoreUsers()
                         }
                     }
             }
         }
         .navigationTitle("Users")
         .task {
-            await loadUsers()
+            await loadInitialUsers()
         }
         .refreshable {
-            await loadUsers()
+            await loadInitialUsers()
         }
     }
     
-    private func loadUsers() async {
-        guard !isLoading else { return }
-        
-        isLoading = true
-        defer { isLoading = false }
-        
-        do {
-            let response = try await service.load(.users())
-            try handle(response: response)
-        } catch {
-            handle(error)
-        }
+    private func loadInitialUsers() async {
+        await loadUsers(page: 1)
     }
     
-    private func loadMore() async {
-        guard !isLoading else { return }
-        
+    private func loadMoreUsers() async {
         guard let nextPage = pagination?.nextPage else { return }
+        await loadUsers(page: nextPage)
+    }
+    
+    private func loadUsers(page: Int) async {
+        guard !isLoading else { return }
         
         isLoading = true
         defer { isLoading = false }
         
         do {
-            let response = try await service.load(.users(page: nextPage))
+            let response = try await service.load(.users(page: page))
             try handle(response: response)
         } catch {
             handle(error)
