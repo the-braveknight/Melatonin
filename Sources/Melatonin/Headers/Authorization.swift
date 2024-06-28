@@ -26,17 +26,23 @@ public struct Auth: HeaderKey, HTTPHeader {
     }
 }
 
-public enum Authorization : HeaderValue {
-    case bearer(token: String)
-    case basic(String)
+public struct Authorization: HeaderValue {
+    public let headerValue: String
     
-    public var headerValue: String {
-        switch self {
-        case .bearer(let token):
-            return "Bearer \(token)"
-        case .basic(let string):
-            return "Basic \(string)"
-        }
+    public init(_ headerValue: String) {
+        self.headerValue = headerValue
+    }
+    
+    public static func bearer(token: String) -> Authorization {
+        Authorization("Bearer \(token)")
+    }
+    
+    public static func basic(string: String) -> Authorization {
+        Authorization("Basic \(string)")
+    }
+    
+    public static func clientID(accessKey: String) -> Authorization {
+        Authorization("Client-ID \(accessKey)")
     }
 }
 

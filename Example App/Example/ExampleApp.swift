@@ -7,16 +7,39 @@
 
 import SwiftUI
 import SwiftData
+import AppIntents
 
 @main
 struct ExampleApp: App {
     private let service = Service()
+    private let modelContainer: ModelContainer
+    
+    @State private var router: Router
+    
+    init() {
+        do {
+            // MARK: - Initialize ModelContainer.
+            let modelContainer = try ModelContainer(for: User.self, Post.self, Todo.self)
+            self.modelContainer = modelContainer
+            
+            // MARK: Make ModelContainer available to App Intents.
+            AppDependencyManager.shared.add(dependency: modelContainer)
+            
+            // MARK: - App Router
+            let router = Router()
+            self.router = router
+            AppDependencyManager.shared.add(dependency: router)
+        } catch {
+            fatalError("Unable to configure SwiftData container.")
+        }
+    }
     
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(for: [User.self, Post.self, Todo.self])
+        .modelContainer(modelContainer)
+        .environment(router)
         .environment(\.service, service)
         .environment(\.handleError, HandleErrorAction(action: handle))
     }

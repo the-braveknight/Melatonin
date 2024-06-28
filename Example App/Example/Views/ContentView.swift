@@ -8,14 +8,12 @@
 import SwiftUI
 
 struct ContentView: View {
-    private enum Tab: String {
-        case users, posts, todos
-    }
-    
-    @State private var currentTab: Tab = .users
-    
+    @Environment(Router.self) var router: Router
+        
     var body: some View {
-        TabView(selection: $currentTab) {
+        @Bindable var router = router
+        
+        TabView(selection: $router.currentTab) {
             NavigationStack {
                 UsersView()
             }
@@ -39,4 +37,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
+        .modelContainer(for: [User.self, Post.self, Todo.self], inMemory: true)
 }
