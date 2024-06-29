@@ -7,7 +7,6 @@
 
 import AppIntents
 import SwiftData
-import SwiftUI
 
 struct ToggleTodoIntent: AppIntent {
     static let title: LocalizedStringResource = "Toggle Todo"
@@ -32,9 +31,8 @@ struct ToggleTodoIntent: AppIntent {
         if let todo = query.first {
             todo.isCompleted.toggle()
             try modelContainer.mainContext.save()
+            router.open(route: .todo(todo), mode: .navigation)
         }
-        
-        router.currentTab = .todos
         
         return .result()
     }

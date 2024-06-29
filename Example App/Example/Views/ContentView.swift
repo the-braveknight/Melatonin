@@ -6,36 +6,42 @@
 //
 
 import SwiftUI
+import Dopamine
 
 struct ContentView: View {
     @Environment(Router.self) var router: Router
-        
+    
     var body: some View {
         @Bindable var router = router
         
         TabView(selection: $router.currentTab) {
-            NavigationStack {
+            NavigationStack(path: $router.usersPath) {
                 UsersView()
+                    .withRouterDestinations(router)
             }
             .tabItem { Label("Users", systemImage: "person.3") }
-            .tag(Tab.users)
+            .tag(Router.Tab.users)
             
-            NavigationStack {
+            NavigationStack(path: $router.postsPath) {
                 PostsView()
+                    .withRouterDestinations(router)
             }
             .tabItem { Label("Posts", systemImage: "doc.text") }
-            .tag(Tab.posts)
+            .tag(Router.Tab.posts)
             
-            NavigationStack {
+            NavigationStack(path: $router.todosPath) {
                 TodosView()
+                    .withRouterDestinations(router)
             }
             .tabItem { Label("Todos", systemImage: "list.bullet") }
-            .tag(Tab.todos)
+            .tag(Router.Tab.todos)
         }
+        .withRouterSheets(router)
     }
 }
 
 #Preview {
     ContentView()
+        .environment(Router())
         .modelContainer(for: [User.self, Post.self, Todo.self], inMemory: true)
 }

@@ -22,9 +22,6 @@ struct PostsView: View {
     @State private var pagination: Pagination? = nil
     @State private var isLoading: Bool = false
     
-    // MARK: - Navigation Path
-    @State private var navigationPath = NavigationPath()
-    
     var body: some View {
         List {
             ForEach(posts) { post in

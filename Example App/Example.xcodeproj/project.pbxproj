@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		962532192C2F9E4E00DDF7F5 /* Dopamine in Frameworks */ = {isa = PBXBuildFile; productRef = 962532182C2F9E4E00DDF7F5 /* Dopamine */; };
+		9625321C2C2FA0B900DDF7F5 /* Dopamine in Frameworks */ = {isa = PBXBuildFile; productRef = 9625321B2C2FA0B900DDF7F5 /* Dopamine */; };
 		96468E932C27373200151E84 /* TodoRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96468E922C27372F00151E84 /* TodoRow.swift */; };
 		96468E962C273A6300151E84 /* UserRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96468E952C273A5F00151E84 /* UserRow.swift */; };
 		96468E992C273B9D00151E84 /* PostRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96468E982C273B9C00151E84 /* PostRow.swift */; };
@@ -74,7 +76,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9625321C2C2FA0B900DDF7F5 /* Dopamine in Frameworks */,
 				966F23012BC47E0900DD8990 /* Melatonin in Frameworks */,
+				962532192C2F9E4E00DDF7F5 /* Dopamine in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,6 +250,8 @@
 			name = Example;
 			packageProductDependencies = (
 				966F23002BC47E0900DD8990 /* Melatonin */,
+				962532182C2F9E4E00DDF7F5 /* Dopamine */,
+				9625321B2C2FA0B900DDF7F5 /* Dopamine */,
 			);
 			productName = Example;
 			productReference = 96C0051B2BC4749C00134D6C /* Example.app */;
@@ -277,6 +283,7 @@
 			mainGroup = 96C005122BC4749C00134D6C;
 			packageReferences = (
 				966F22FF2BC47E0900DD8990 /* XCLocalSwiftPackageReference ".." */,
+				9625321A2C2FA0B900DDF7F5 /* XCLocalSwiftPackageReference "Packages/Dopamine" */,
 			);
 			productRefGroup = 96C0051C2BC4749C00134D6C /* Products */;
 			projectDirPath = "";
@@ -547,6 +554,10 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
+		9625321A2C2FA0B900DDF7F5 /* XCLocalSwiftPackageReference "Packages/Dopamine" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/Dopamine;
+		};
 		966F22FF2BC47E0900DD8990 /* XCLocalSwiftPackageReference ".." */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ..;
@@ -554,6 +565,14 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		962532182C2F9E4E00DDF7F5 /* Dopamine */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Dopamine;
+		};
+		9625321B2C2FA0B900DDF7F5 /* Dopamine */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Dopamine;
+		};
 		966F23002BC47E0900DD8990 /* Melatonin */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Melatonin;

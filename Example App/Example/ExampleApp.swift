@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftData
 import AppIntents
+import Observation
 
 @main
 struct ExampleApp: App {
