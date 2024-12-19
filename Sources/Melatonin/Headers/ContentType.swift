@@ -7,27 +7,15 @@
 
 import Foundation
 
-public struct ContentType: HeaderKey, HTTPHeader {
-    public static let field: String = "Content-Type"
-    public typealias Value = MIMEType
-    
-    let mimeType: Value
-    
-    public init(_ mimeType: Value) {
-        self.mimeType = mimeType
-    }
-    
-    public var field: String {
-        Self.field
-    }
+public struct ContentType: HTTPHeader {
+    public let field: String = "Content-Type"
+    public let mimeType: MIMEType
     
     public var value: String {
-        mimeType.headerValue
+        mimeType.value
     }
-}
-
-public extension HeaderValues {
-    var contentType: ContentType.Type {
-        ContentType.self
+    
+    public init(_ mimeType: MIMEType) {
+        self.mimeType = mimeType
     }
 }

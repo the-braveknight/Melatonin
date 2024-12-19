@@ -22,7 +22,7 @@ struct PhotosEndpoint: UnsplashEndpoint {
     @Query(name: "page") var page: Int = 1
     
     var headers: [any HTTPHeader] {
-        Auth(.clientID(accessKey: "Yer4njZkF-Xd8X0JdlalAHPfoLInfy1lAco31vlWp6Q"))
+        Authorization(.bearer(token: "Yer4njZkF-Xd8X0JdlalAHPfoLInfy1lAco31vlWp6Q"))
     }
 }
 
