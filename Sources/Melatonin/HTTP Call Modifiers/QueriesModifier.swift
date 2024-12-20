@@ -49,4 +49,8 @@ public extension HTTPCall {
     func queries(@QueryGroup queries: () -> [Query]) -> ModifiedHTTPCall<Self, QueriesModifier> {
         modifier(QueriesModifier(queries: queries()))
     }
+    
+    func query(name: String, value: String? = nil) -> ModifiedHTTPCall<Self, QueriesModifier> {
+        queries { Query(name: name, value: value) }
+    }
 }
