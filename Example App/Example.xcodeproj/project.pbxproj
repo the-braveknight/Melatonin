@@ -17,22 +17,22 @@
 		966F23042BC48B4A00DD8990 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966F23032BC48B4A00DD8990 /* User.swift */; };
 		966F23062BC48B5A00DD8990 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966F23052BC48B5A00DD8990 /* Post.swift */; };
 		966F23082BC48B6900DD8990 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966F23072BC48B6900DD8990 /* Todo.swift */; };
-		966F230A2BC48B9700DD8990 /* UserEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966F23092BC48B9700DD8990 /* UserEndpoint.swift */; };
+		967659052D157C5500F4A405 /* Environment+GoRESTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967659042D157C4B00F4A405 /* Environment+GoRESTService.swift */; };
+		967659072D157CCE00F4A405 /* URLSession+example.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967659062D157CC400F4A405 /* URLSession+example.swift */; };
+		967659092D157F3600F4A405 /* PaginatedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967659082D157F3200F4A405 /* PaginatedResponse.swift */; };
 		96C0051F2BC4749C00134D6C /* ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C0051E2BC4749C00134D6C /* ExampleApp.swift */; };
 		96C005212BC4749C00134D6C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C005202BC4749C00134D6C /* ContentView.swift */; };
 		96C005232BC4749D00134D6C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96C005222BC4749D00134D6C /* Assets.xcassets */; };
 		96C005272BC4749D00134D6C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96C005262BC4749D00134D6C /* Preview Assets.xcassets */; };
-		96C005392BC474F700134D6C /* GoRESTEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C0052D2BC474F700134D6C /* GoRESTEndpoint.swift */; };
-		96C0053A2BC474F700134D6C /* PostsEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C0052E2BC474F700134D6C /* PostsEndpoint.swift */; };
-		96C0053B2BC474F700134D6C /* TodosEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C0052F2BC474F700134D6C /* TodosEndpoint.swift */; };
-		96C0053C2BC474F700134D6C /* UsersEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C005302BC474F700134D6C /* UsersEndpoint.swift */; };
-		96C0053D2BC474F700134D6C /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C005322BC474F700134D6C /* Service.swift */; };
+		96C005392BC474F700134D6C /* GoRESTCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C0052D2BC474F700134D6C /* GoRESTCall.swift */; };
+		96C0053A2BC474F700134D6C /* GetPosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C0052E2BC474F700134D6C /* GetPosts.swift */; };
+		96C0053B2BC474F700134D6C /* GetTodos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C0052F2BC474F700134D6C /* GetTodos.swift */; };
+		96C0053C2BC474F700134D6C /* GetUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C005302BC474F700134D6C /* GetUsers.swift */; };
+		96C0053D2BC474F700134D6C /* GoRESTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C005322BC474F700134D6C /* GoRESTService.swift */; };
 		96C0053F2BC474F700134D6C /* PostsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C005352BC474F700134D6C /* PostsView.swift */; };
 		96C005402BC474F700134D6C /* TodosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C005362BC474F700134D6C /* TodosView.swift */; };
 		96C005412BC474F700134D6C /* UsersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C005372BC474F700134D6C /* UsersView.swift */; };
 		96C8E7FC2C1E515500FC5D28 /* CheckmarkToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C8E7FB2C1E515000FC5D28 /* CheckmarkToggleStyle.swift */; };
-		96F7CC632C2A289200E9CC03 /* UnsplashEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F7CC622C2A288A00E9CC03 /* UnsplashEndpoint.swift */; };
-		96F7CC652C2A2BC500E9CC03 /* PhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F7CC642C2A2BBF00E9CC03 /* PhotosView.swift */; };
 		96F7CC672C2CDEF500E9CC03 /* ToggleTodoIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F7CC662C2CDEEC00E9CC03 /* ToggleTodoIntent.swift */; };
 		96F7CC862C2CF12D00E9CC03 /* TodoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F7CC852C2CF12B00E9CC03 /* TodoEntity.swift */; };
 		96F7CC882C2CF2AA00E9CC03 /* TodoEntityQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F7CC872C2CF2A700E9CC03 /* TodoEntityQuery.swift */; };
@@ -47,24 +47,24 @@
 		966F23032BC48B4A00DD8990 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		966F23052BC48B5A00DD8990 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		966F23072BC48B6900DD8990 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
-		966F23092BC48B9700DD8990 /* UserEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEndpoint.swift; sourceTree = "<group>"; };
+		967659042D157C4B00F4A405 /* Environment+GoRESTService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Environment+GoRESTService.swift"; sourceTree = "<group>"; };
+		967659062D157CC400F4A405 /* URLSession+example.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+example.swift"; sourceTree = "<group>"; };
+		967659082D157F3200F4A405 /* PaginatedResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginatedResponse.swift; sourceTree = "<group>"; };
 		96C0051B2BC4749C00134D6C /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96C0051E2BC4749C00134D6C /* ExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleApp.swift; sourceTree = "<group>"; };
 		96C005202BC4749C00134D6C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		96C005222BC4749D00134D6C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		96C005242BC4749D00134D6C /* Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Example.entitlements; sourceTree = "<group>"; };
 		96C005262BC4749D00134D6C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		96C0052D2BC474F700134D6C /* GoRESTEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoRESTEndpoint.swift; sourceTree = "<group>"; };
-		96C0052E2BC474F700134D6C /* PostsEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostsEndpoint.swift; sourceTree = "<group>"; };
-		96C0052F2BC474F700134D6C /* TodosEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodosEndpoint.swift; sourceTree = "<group>"; };
-		96C005302BC474F700134D6C /* UsersEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersEndpoint.swift; sourceTree = "<group>"; };
-		96C005322BC474F700134D6C /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		96C0052D2BC474F700134D6C /* GoRESTCall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoRESTCall.swift; sourceTree = "<group>"; };
+		96C0052E2BC474F700134D6C /* GetPosts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetPosts.swift; sourceTree = "<group>"; };
+		96C0052F2BC474F700134D6C /* GetTodos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetTodos.swift; sourceTree = "<group>"; };
+		96C005302BC474F700134D6C /* GetUsers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetUsers.swift; sourceTree = "<group>"; };
+		96C005322BC474F700134D6C /* GoRESTService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoRESTService.swift; sourceTree = "<group>"; };
 		96C005352BC474F700134D6C /* PostsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostsView.swift; sourceTree = "<group>"; };
 		96C005362BC474F700134D6C /* TodosView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodosView.swift; sourceTree = "<group>"; };
 		96C005372BC474F700134D6C /* UsersView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersView.swift; sourceTree = "<group>"; };
 		96C8E7FB2C1E515000FC5D28 /* CheckmarkToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckmarkToggleStyle.swift; sourceTree = "<group>"; };
-		96F7CC622C2A288A00E9CC03 /* UnsplashEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashEndpoint.swift; sourceTree = "<group>"; };
-		96F7CC642C2A2BBF00E9CC03 /* PhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosView.swift; sourceTree = "<group>"; };
 		96F7CC662C2CDEEC00E9CC03 /* ToggleTodoIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleTodoIntent.swift; sourceTree = "<group>"; };
 		96F7CC852C2CF12B00E9CC03 /* TodoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoEntity.swift; sourceTree = "<group>"; };
 		96F7CC872C2CF2A700E9CC03 /* TodoEntityQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoEntityQuery.swift; sourceTree = "<group>"; };
@@ -130,6 +130,15 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		967659032D157C4100F4A405 /* Environment */ = {
+			isa = PBXGroup;
+			children = (
+				967659042D157C4B00F4A405 /* Environment+GoRESTService.swift */,
+				96468E9C2C2740A400151E84 /* Environment Actions */,
+			);
+			path = Environment;
+			sourceTree = "<group>";
+		};
 		96C005122BC4749C00134D6C = {
 			isa = PBXGroup;
 			children = (
@@ -152,7 +161,7 @@
 				96C0051E2BC4749C00134D6C /* ExampleApp.swift */,
 				96F7CC8B2C2DEFEC00E9CC03 /* Router.swift */,
 				96F7CC842C2CF10200E9CC03 /* App Intents */,
-				96468E9C2C2740A400151E84 /* Environment Actions */,
+				967659032D157C4100F4A405 /* Environment */,
 				966F23022BC48B4000DD8990 /* Models */,
 				96C005332BC474F700134D6C /* Networking */,
 				96C005382BC474F700134D6C /* Views */,
@@ -174,11 +183,11 @@
 		96C005312BC474F700134D6C /* GoREST API */ = {
 			isa = PBXGroup;
 			children = (
-				96C0052D2BC474F700134D6C /* GoRESTEndpoint.swift */,
-				96C005302BC474F700134D6C /* UsersEndpoint.swift */,
-				966F23092BC48B9700DD8990 /* UserEndpoint.swift */,
-				96C0052E2BC474F700134D6C /* PostsEndpoint.swift */,
-				96C0052F2BC474F700134D6C /* TodosEndpoint.swift */,
+				967659082D157F3200F4A405 /* PaginatedResponse.swift */,
+				96C0052D2BC474F700134D6C /* GoRESTCall.swift */,
+				96C005302BC474F700134D6C /* GetUsers.swift */,
+				96C0052E2BC474F700134D6C /* GetPosts.swift */,
+				96C0052F2BC474F700134D6C /* GetTodos.swift */,
 			);
 			path = "GoREST API";
 			sourceTree = "<group>";
@@ -186,8 +195,8 @@
 		96C005332BC474F700134D6C /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				96C005322BC474F700134D6C /* Service.swift */,
-				96F7CC612C2A282500E9CC03 /* Unsplash API */,
+				967659062D157CC400F4A405 /* URLSession+example.swift */,
+				96C005322BC474F700134D6C /* GoRESTService.swift */,
 				96C005312BC474F700134D6C /* GoREST API */,
 			);
 			path = Networking;
@@ -197,7 +206,6 @@
 			isa = PBXGroup;
 			children = (
 				96C005202BC4749C00134D6C /* ContentView.swift */,
-				96F7CC642C2A2BBF00E9CC03 /* PhotosView.swift */,
 				96468E972C273B9700151E84 /* Posts */,
 				96468E912C27371100151E84 /* Todos */,
 				96468E942C273A5900151E84 /* Users */,
@@ -212,14 +220,6 @@
 				96C8E7FB2C1E515000FC5D28 /* CheckmarkToggleStyle.swift */,
 			);
 			path = Helpers;
-			sourceTree = "<group>";
-		};
-		96F7CC612C2A282500E9CC03 /* Unsplash API */ = {
-			isa = PBXGroup;
-			children = (
-				96F7CC622C2A288A00E9CC03 /* UnsplashEndpoint.swift */,
-			);
-			path = "Unsplash API";
 			sourceTree = "<group>";
 		};
 		96F7CC842C2CF10200E9CC03 /* App Intents */ = {
@@ -311,27 +311,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				966F230A2BC48B9700DD8990 /* UserEndpoint.swift in Sources */,
 				96C8E7FC2C1E515500FC5D28 /* CheckmarkToggleStyle.swift in Sources */,
 				96F7CC862C2CF12D00E9CC03 /* TodoEntity.swift in Sources */,
 				96C005402BC474F700134D6C /* TodosView.swift in Sources */,
-				96C0053C2BC474F700134D6C /* UsersEndpoint.swift in Sources */,
-				96C0053D2BC474F700134D6C /* Service.swift in Sources */,
+				96C0053C2BC474F700134D6C /* GetUsers.swift in Sources */,
+				96C0053D2BC474F700134D6C /* GoRESTService.swift in Sources */,
+				967659092D157F3600F4A405 /* PaginatedResponse.swift in Sources */,
+				967659052D157C5500F4A405 /* Environment+GoRESTService.swift in Sources */,
 				96468E9B2C273CC500151E84 /* HandleErrorAction.swift in Sources */,
 				96F7CC8C2C2DEFF700E9CC03 /* Router.swift in Sources */,
 				966F23062BC48B5A00DD8990 /* Post.swift in Sources */,
 				96C005212BC4749C00134D6C /* ContentView.swift in Sources */,
-				96C0053A2BC474F700134D6C /* PostsEndpoint.swift in Sources */,
+				967659072D157CCE00F4A405 /* URLSession+example.swift in Sources */,
+				96C0053A2BC474F700134D6C /* GetPosts.swift in Sources */,
 				966F23082BC48B6900DD8990 /* Todo.swift in Sources */,
-				96C005392BC474F700134D6C /* GoRESTEndpoint.swift in Sources */,
-				96C0053B2BC474F700134D6C /* TodosEndpoint.swift in Sources */,
+				96C005392BC474F700134D6C /* GoRESTCall.swift in Sources */,
+				96C0053B2BC474F700134D6C /* GetTodos.swift in Sources */,
 				966F23042BC48B4A00DD8990 /* User.swift in Sources */,
 				96468E932C27373200151E84 /* TodoRow.swift in Sources */,
 				96C0051F2BC4749C00134D6C /* ExampleApp.swift in Sources */,
 				96468E992C273B9D00151E84 /* PostRow.swift in Sources */,
 				96F7CC882C2CF2AA00E9CC03 /* TodoEntityQuery.swift in Sources */,
-				96F7CC632C2A289200E9CC03 /* UnsplashEndpoint.swift in Sources */,
-				96F7CC652C2A2BC500E9CC03 /* PhotosView.swift in Sources */,
 				96468E962C273A6300151E84 /* UserRow.swift in Sources */,
 				96F7CC672C2CDEF500E9CC03 /* ToggleTodoIntent.swift in Sources */,
 				96C005412BC474F700134D6C /* UsersView.swift in Sources */,

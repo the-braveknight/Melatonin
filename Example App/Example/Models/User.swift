@@ -9,12 +9,12 @@ import Foundation
 import SwiftData
 
 @Model
-class User: Decodable, Identifiable {
-    @Attribute(.unique) let id: Int
-    let name: String
-    let email: String
-    let gender: Gender
-    let status: Status
+final class User: Decodable, Identifiable {
+    @Attribute(.unique) var id: Int
+    var name: String
+    var email: String
+    var gender: Gender
+    var status: Status
     
     enum Gender: String, Codable {
         case male, female

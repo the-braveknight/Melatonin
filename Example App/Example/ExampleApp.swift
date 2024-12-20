@@ -12,10 +12,9 @@ import Observation
 
 @main
 struct ExampleApp: App {
-    private let service = Service()
+    private let service = GoRESTService(session: .example)
     private let modelContainer: ModelContainer
-    
-    @State private var router: Router
+    private let router: Router
     
     init() {
         do {

@@ -9,11 +9,11 @@ import Foundation
 import SwiftData
 
 @Model
-class Post: Decodable, Identifiable {
-    @Attribute(.unique) let id: Int
-    let user: User.ID
-    let title: String
-    let body: String
+final class Post: Decodable, Identifiable {
+    @Attribute(.unique) var id: Int
+    var user: User.ID
+    var title: String
+    var body: String
     
     init(id: Int, user: User.ID, title: String, body: String) {
         self.id = id

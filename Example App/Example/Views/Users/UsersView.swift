@@ -15,11 +15,11 @@ struct UsersView: View {
     @Environment(\.modelContext) private var modelContext: ModelContext
     
     // MARK: - Environment Variables
-    @Environment(\.service) private var service: Service
+    @Environment(\.service) private var service: GoRESTService
     @Environment(\.handleError) private var handle
     
     // MARK: - Pagination
-    @State private var pagination: Pagination? = nil
+    @State private var pagination: PaginationMetadata? = nil
     @State private var isLoading: Bool = false
     
     var body: some View {
@@ -58,16 +58,16 @@ struct UsersView: View {
         defer { isLoading = false }
         
         do {
-            let response = try await service.load(.users(page: page))
+            let response = try await service.loadUsers(page: page)
             try handle(response: response)
         } catch {
             handle(error)
         }
     }
     
-    private func handle(response: UsersEndpoint.Response) throws {
+    private func handle(response: PaginatedResponse<User>) throws {
         // MARK: - Update Data
-        response.records.forEach { modelContext.insert($0) }
+        response.items.forEach { modelContext.insert($0) }
         
         if modelContext.hasChanges {
             try modelContext.save()
@@ -76,7 +76,7 @@ struct UsersView: View {
         // MARK: - Update Pagination
         // Dynamically determine the current page based on persisted records.
         let currentPage = (users.count / response.pagination.recordsPerPage) + 1
-        self.pagination = Pagination(totalCount: response.pagination.totalCount, totalPages: response.pagination.totalPages, recordsPerPage: response.pagination.recordsPerPage, currentPage: currentPage)
+        self.pagination = PaginationMetadata(totalCount: response.pagination.totalCount, totalPages: response.pagination.totalPages, recordsPerPage: response.pagination.recordsPerPage, currentPage: currentPage)
     }
 }
 

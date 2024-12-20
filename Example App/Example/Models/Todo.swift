@@ -9,11 +9,11 @@ import Foundation
 import SwiftData
 
 @Model
-class Todo: Decodable, Identifiable {
-    @Attribute(.unique) let id: Int
-    let user: User.ID
-    let title: String
-    let dueDate: Date
+final class Todo: Decodable, Identifiable {
+    @Attribute(.unique) var id: Int
+    var user: User.ID
+    var title: String
+    var dueDate: Date
     var status: Status
     
     enum Status: String, Codable {

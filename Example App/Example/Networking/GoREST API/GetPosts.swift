@@ -1,0 +1,27 @@
+//
+//  Posts API.swift
+//  NetworkingIdeas
+//
+//  Created by Zaid Rahhawi on 4/7/24.
+//
+
+import Foundation
+import Melatonin
+
+struct GetPosts: Endpoint {
+    var user: User.ID? = nil
+    var page: Int = 1
+    var recordsPerPage: Int = 10
+    var title: String? = nil
+    
+    var call: some HTTPCall {
+        GoRESTCall()
+            .path("/public/v2/posts")
+            .queries {
+                Query(name: "user_id", value: user.map(String.init))
+                Query(name: "page", value: String(page))
+                Query(name: "per_page", value: String(recordsPerPage))
+                Query(name: "title", value: title)
+            }
+    }
+}
