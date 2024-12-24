@@ -11,11 +11,11 @@ import Melatonin
 
 struct UsersView: View {
     // MARK: - SwiftData
-    @Query(sort: \User.id, order: .reverse, animation: .default) private var users: [User]
+    @Query(sort: \User.id, animation: .default) private var users: [User]
     @Environment(\.modelContext) private var modelContext: ModelContext
     
     // MARK: - Environment Variables
-    @Environment(\.service) private var service: GoRESTService
+    @Environment(\.service) private var service
     @Environment(\.handleError) private var handle
     
     // MARK: - Pagination
@@ -34,6 +34,9 @@ struct UsersView: View {
             }
         }
         .navigationTitle("Users")
+        .toolbar {
+            ToolbarProgressView(isShown: isLoading)
+        }
         .task {
             await loadInitialUsers()
         }
@@ -83,5 +86,7 @@ struct UsersView: View {
 #Preview {
     NavigationStack {
         UsersView()
-    }.modelContainer(for: User.self, inMemory: true)
+    }
+    .environment(\.service, MockGoRESTService())
+    .modelContainer(for: User.self, inMemory: true)
 }

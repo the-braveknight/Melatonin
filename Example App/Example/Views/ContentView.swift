@@ -44,4 +44,5 @@ struct ContentView: View {
     ContentView()
         .environment(Router())
         .modelContainer(for: [User.self, Post.self, Todo.self], inMemory: true)
+        .environment(\.service, MockGoRESTService())
 }

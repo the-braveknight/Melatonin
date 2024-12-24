@@ -12,7 +12,7 @@ import Observation
 
 @main
 struct ExampleApp: App {
-    private let service = GoRESTService(session: .example)
+    private let service = HTTPGoRESTService(session: .example)
     private let modelContainer: ModelContainer
     private let router: Router
     

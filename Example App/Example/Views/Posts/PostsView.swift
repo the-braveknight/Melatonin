@@ -11,11 +11,11 @@ import Melatonin
 
 struct PostsView: View {
     // MARK: - SwiftData
-    @Query(sort: \Post.id, order: .reverse, animation: .default) private var posts: [Post]
+    @Query(sort: \Post.id, animation: .default) private var posts: [Post]
     @Environment(\.modelContext) private var modelContext: ModelContext
     
     // MARK: - Environment Variables
-    @Environment(\.service) private var service: GoRESTService
+    @Environment(\.service) private var service
     @Environment(\.handleError) private var handle
     
     // MARK: - Pagination
@@ -34,6 +34,9 @@ struct PostsView: View {
             }
         }
         .navigationTitle("Posts")
+        .toolbar {
+            ToolbarProgressView(isShown: isLoading)
+        }
         .task {
             await loadInitialPosts()
         }
@@ -83,6 +86,7 @@ struct PostsView: View {
 #Preview {
     NavigationStack {
         PostsView()
-    }.modelContainer(for: Post.self, inMemory: true)
+    }
+    .environment(\.service, MockGoRESTService())
+    .modelContainer(for: Post.self, inMemory: true)
 }
-

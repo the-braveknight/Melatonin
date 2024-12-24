@@ -8,5 +8,5 @@
 import SwiftUI
 
 extension EnvironmentValues {
-    @Entry var service = GoRESTService(session: .example)
+    @Entry var service: GoRESTService = HTTPGoRESTService(session: .example)
 }

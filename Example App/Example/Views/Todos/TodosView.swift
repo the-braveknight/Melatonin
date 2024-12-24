@@ -11,11 +11,11 @@ import Melatonin
 
 struct TodosView: View {
     // MARK: - SwiftData
-    @Query(sort: \Todo.id, order: .reverse, animation: .default) private var todos: [Todo]
+    @Query(sort: \Todo.id, animation: .default) private var todos: [Todo]
     @Environment(\.modelContext) private var modelContext: ModelContext
     
     // MARK: - Environment Variables
-    @Environment(\.service) private var service: GoRESTService
+    @Environment(\.service) private var service
     @Environment(\.handleError) private var handle
     
     // MARK: - Pagination
@@ -34,6 +34,9 @@ struct TodosView: View {
             }
         }
         .navigationTitle("Todos")
+        .toolbar {
+            ToolbarProgressView(isShown: isLoading)
+        }
         .task {
             await loadInitialTodos()
         }
@@ -83,5 +86,7 @@ struct TodosView: View {
 #Preview {
     NavigationStack {
         TodosView()
-    }.modelContainer(for: Todo.self, inMemory: true)
+    }
+    .environment(\.service, MockGoRESTService())
+    .modelContainer(for: Todo.self, inMemory: true)
 }

@@ -20,9 +20,9 @@ final class Todo: Decodable, Identifiable {
         case pending, completed
     }
     
-    init(id: Int, userID: User.ID, title: String, dueDate: Date, status: Status) {
+    init(id: Int, user: User.ID, title: String, dueDate: Date, status: Status) {
         self.id = id
-        self.user = userID
+        self.user = user
         self.title = title
         self.dueDate = dueDate
         self.status = status

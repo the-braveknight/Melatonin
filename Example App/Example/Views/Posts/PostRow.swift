@@ -10,8 +10,14 @@ import SwiftUI
 struct PostRow: View {
     let post: Post
     
+    @State var isExpanded: Bool = false
+    
     var body: some View {
-        Text(post.title)
-            .font(.headline)
+        DisclosureGroup(isExpanded: $isExpanded) {
+            Text(post.body)
+        } label: {
+            Text(post.title)
+                .font(.headline)
+        }
     }
 }

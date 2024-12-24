@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		962532192C2F9E4E00DDF7F5 /* Dopamine in Frameworks */ = {isa = PBXBuildFile; productRef = 962532182C2F9E4E00DDF7F5 /* Dopamine */; };
 		9625321C2C2FA0B900DDF7F5 /* Dopamine in Frameworks */ = {isa = PBXBuildFile; productRef = 9625321B2C2FA0B900DDF7F5 /* Dopamine */; };
+		9634C1992D1ACF6300280A73 /* GoRESTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9634C1982D1ACF5E00280A73 /* GoRESTService.swift */; };
+		9634C19B2D1ACFD000280A73 /* MockGoRESTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9634C19A2D1ACFCA00280A73 /* MockGoRESTService.swift */; };
+		9634C19D2D1B44C900280A73 /* ToolbarProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9634C19C2D1B44BF00280A73 /* ToolbarProgressView.swift */; };
 		96468E932C27373200151E84 /* TodoRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96468E922C27372F00151E84 /* TodoRow.swift */; };
 		96468E962C273A6300151E84 /* UserRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96468E952C273A5F00151E84 /* UserRow.swift */; };
 		96468E992C273B9D00151E84 /* PostRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96468E982C273B9C00151E84 /* PostRow.swift */; };
@@ -28,7 +31,7 @@
 		96C0053A2BC474F700134D6C /* GetPosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C0052E2BC474F700134D6C /* GetPosts.swift */; };
 		96C0053B2BC474F700134D6C /* GetTodos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C0052F2BC474F700134D6C /* GetTodos.swift */; };
 		96C0053C2BC474F700134D6C /* GetUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C005302BC474F700134D6C /* GetUsers.swift */; };
-		96C0053D2BC474F700134D6C /* GoRESTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C005322BC474F700134D6C /* GoRESTService.swift */; };
+		96C0053D2BC474F700134D6C /* HTTPGoRESTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C005322BC474F700134D6C /* HTTPGoRESTService.swift */; };
 		96C0053F2BC474F700134D6C /* PostsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C005352BC474F700134D6C /* PostsView.swift */; };
 		96C005402BC474F700134D6C /* TodosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C005362BC474F700134D6C /* TodosView.swift */; };
 		96C005412BC474F700134D6C /* UsersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C005372BC474F700134D6C /* UsersView.swift */; };
@@ -40,6 +43,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9634C1982D1ACF5E00280A73 /* GoRESTService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoRESTService.swift; sourceTree = "<group>"; };
+		9634C19A2D1ACFCA00280A73 /* MockGoRESTService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockGoRESTService.swift; sourceTree = "<group>"; };
+		9634C19C2D1B44BF00280A73 /* ToolbarProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarProgressView.swift; sourceTree = "<group>"; };
 		96468E922C27372F00151E84 /* TodoRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoRow.swift; sourceTree = "<group>"; };
 		96468E952C273A5F00151E84 /* UserRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRow.swift; sourceTree = "<group>"; };
 		96468E982C273B9C00151E84 /* PostRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRow.swift; sourceTree = "<group>"; };
@@ -60,7 +66,7 @@
 		96C0052E2BC474F700134D6C /* GetPosts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetPosts.swift; sourceTree = "<group>"; };
 		96C0052F2BC474F700134D6C /* GetTodos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetTodos.swift; sourceTree = "<group>"; };
 		96C005302BC474F700134D6C /* GetUsers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetUsers.swift; sourceTree = "<group>"; };
-		96C005322BC474F700134D6C /* GoRESTService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoRESTService.swift; sourceTree = "<group>"; };
+		96C005322BC474F700134D6C /* HTTPGoRESTService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPGoRESTService.swift; sourceTree = "<group>"; };
 		96C005352BC474F700134D6C /* PostsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostsView.swift; sourceTree = "<group>"; };
 		96C005362BC474F700134D6C /* TodosView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodosView.swift; sourceTree = "<group>"; };
 		96C005372BC474F700134D6C /* UsersView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersView.swift; sourceTree = "<group>"; };
@@ -196,7 +202,9 @@
 			isa = PBXGroup;
 			children = (
 				967659062D157CC400F4A405 /* URLSession+example.swift */,
-				96C005322BC474F700134D6C /* GoRESTService.swift */,
+				9634C1982D1ACF5E00280A73 /* GoRESTService.swift */,
+				96C005322BC474F700134D6C /* HTTPGoRESTService.swift */,
+				9634C19A2D1ACFCA00280A73 /* MockGoRESTService.swift */,
 				96C005312BC474F700134D6C /* GoREST API */,
 			);
 			path = Networking;
@@ -218,6 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				96C8E7FB2C1E515000FC5D28 /* CheckmarkToggleStyle.swift */,
+				9634C19C2D1B44BF00280A73 /* ToolbarProgressView.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -265,7 +274,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1530;
-				LastUpgradeCheck = 1530;
+				LastUpgradeCheck = 1620;
 				TargetAttributes = {
 					96C0051A2BC4749C00134D6C = {
 						CreatedOnToolsVersion = 15.3;
@@ -315,10 +324,12 @@
 				96F7CC862C2CF12D00E9CC03 /* TodoEntity.swift in Sources */,
 				96C005402BC474F700134D6C /* TodosView.swift in Sources */,
 				96C0053C2BC474F700134D6C /* GetUsers.swift in Sources */,
-				96C0053D2BC474F700134D6C /* GoRESTService.swift in Sources */,
+				96C0053D2BC474F700134D6C /* HTTPGoRESTService.swift in Sources */,
 				967659092D157F3600F4A405 /* PaginatedResponse.swift in Sources */,
 				967659052D157C5500F4A405 /* Environment+GoRESTService.swift in Sources */,
+				9634C1992D1ACF6300280A73 /* GoRESTService.swift in Sources */,
 				96468E9B2C273CC500151E84 /* HandleErrorAction.swift in Sources */,
+				9634C19B2D1ACFD000280A73 /* MockGoRESTService.swift in Sources */,
 				96F7CC8C2C2DEFF700E9CC03 /* Router.swift in Sources */,
 				966F23062BC48B5A00DD8990 /* Post.swift in Sources */,
 				96C005212BC4749C00134D6C /* ContentView.swift in Sources */,
@@ -332,6 +343,7 @@
 				96C0051F2BC4749C00134D6C /* ExampleApp.swift in Sources */,
 				96468E992C273B9D00151E84 /* PostRow.swift in Sources */,
 				96F7CC882C2CF2AA00E9CC03 /* TodoEntityQuery.swift in Sources */,
+				9634C19D2D1B44C900280A73 /* ToolbarProgressView.swift in Sources */,
 				96468E962C273A6300151E84 /* UserRow.swift in Sources */,
 				96F7CC672C2CDEF500E9CC03 /* ToggleTodoIntent.swift in Sources */,
 				96C005412BC474F700134D6C /* UsersView.swift in Sources */,
@@ -376,6 +388,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -437,6 +450,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -464,6 +478,7 @@
 				CODE_SIGN_ENTITLEMENTS = Example/Example.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Example/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -501,6 +516,7 @@
 				CODE_SIGN_ENTITLEMENTS = Example/Example.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Example/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
