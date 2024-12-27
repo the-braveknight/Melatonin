@@ -184,10 +184,6 @@ Here’s how to initialize and use the updated `Service` with the `SecureTokenPr
 
 ```swift
 let tokenProvider = SecureTokenProvider()
-Task {
-    await tokenProvider.setToken("your_secure_access_token_here")
-}
-
 let service = Service(tokenProvider: tokenProvider)
 
 Task {
@@ -208,7 +204,7 @@ Task {
 
 - `accept(_:)`: Sets the `Accept` header.
 - `contentType(_:)`: Sets the `Content-Type` header.
-- `authorization(_:)`: Adds an `Authorization` header via `.auth`.
+- `authorization(_:)`: Adds an `Authorization` header.
 - `userAgent(_:)`: Sets a custom `User-Agent`.
 
 ### Request Properties
