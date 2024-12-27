@@ -60,9 +60,9 @@ struct GetUsers: Endpoint {
 
 ---
 
-## Creating a Service (`HTTPService`)
+## Creating an HTTP Service (`HTTPService`)
 
-The `Service` actor implements the `HTTPService` protocol and provides methods to perform requests and process responses.
+The `GoRESTService` actor implements the `HTTPService` protocol and provides methods to perform requests and process responses.
 
 ### Define the Response Model
 
@@ -78,12 +78,12 @@ struct User: Decodable {
 }
 ```
 
-### Implement the `Service` Actor
+### Implement the `GoRESTService` Actor
 
 ```swift
 import Foundation
 
-actor Service: HTTPService {
+actor GoRESTService: HTTPService {
     let session: URLSession
 
     init(session: URLSession = .shared) {
@@ -101,9 +101,9 @@ actor Service: HTTPService {
 
 ---
 
-### Extend the Service: Adding Authentication
+### Extend the GoRESTService Actor: Adding Authentication
 
-For many APIs, authentication is required to access resources. This logic can be added incrementally to the `Service` implementation.
+For many APIs, authentication is required to access resources. This logic can be added incrementally to the `GoRESTService` implementation.
 
 #### Define the `TokenProvider` Protocol
 
@@ -117,14 +117,14 @@ protocol TokenProvider: Actor {
 }
 ```
 
-#### Update the `Service` Actor with Authentication Logic
+#### Update the `GoRESTService` Actor with Authentication Logic
 
-Here’s how the same `Service` actor is updated to include token management via the `TokenProvider`.
+Here’s how the same `GoRESTService` actor is updated to include token management via the `TokenProvider`.
 
 ```swift
 import Foundation
 
-actor Service: HTTPService {
+actor GoRESTService: HTTPService {
     let session: URLSession
     private let tokenProvider: TokenProvider
 
@@ -174,17 +174,17 @@ actor SecureTokenProvider: TokenProvider {
 
 ### Why Add Authentication?
 
-The initial `Service` implementation works for open APIs. However, when working with APIs requiring authentication, the `TokenProvider` allows secure token management without significantly altering the service’s core structure. This approach keeps the service extensible and adaptable to evolving requirements.
+The initial `GoRESTService` implementation works for open APIs. However, when working with APIs requiring authentication, the `TokenProvider` allows secure token management without significantly altering the service’s core structure. This approach keeps the HTTP service extensible and adaptable to evolving requirements.
 
 ---
 
-### Using the Service with Authentication Logic
+### Using the GoRESTService Actor with Authentication Logic
 
-Here’s how to initialize and use the updated `Service` with the `SecureTokenProvider`:
+Here’s how to initialize and use the updated `GoRESTService` with the `SecureTokenProvider`:
 
 ```swift
 let tokenProvider = SecureTokenProvider()
-let service = Service(tokenProvider: tokenProvider)
+let service = GoRESTService(tokenProvider: tokenProvider)
 
 Task {
     do {
