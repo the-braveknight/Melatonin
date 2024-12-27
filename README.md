@@ -27,7 +27,7 @@ dependencies: [
 
 ## Usage
 
-### Define a Base Request (`HTTPCall`)
+### Define a Base Call (`HTTPCall`)
 
 The `HTTPCall` protocol is the foundation for HTTP requests. Base requests construct a `URLRequest` pointing to the API URL.
 
@@ -101,7 +101,7 @@ actor GoRESTService: HTTPService {
 
 ---
 
-### Extend the GoRESTService Actor: Adding Authentication
+### Extend the `GoRESTService` Actor: Adding Authentication
 
 For many APIs, authentication is required to access resources. This logic can be added incrementally to the `GoRESTService` implementation.
 
@@ -148,7 +148,7 @@ actor GoRESTService: HTTPService {
 
 ---
 
-## Example `TokenProvider` Implementation
+#### Example `TokenProvider` Implementation
 
 The `SecureTokenProvider` securely retrieves the token from a storage mechanism like the Keychain.
 
@@ -172,13 +172,13 @@ actor SecureTokenProvider: TokenProvider {
 
 ---
 
-### Why Add Authentication?
+#### Why Add Authentication?
 
 The initial `GoRESTService` implementation works for open APIs. However, when working with APIs requiring authentication, the `TokenProvider` allows secure token management without significantly altering the service’s core structure. This approach keeps the HTTP service extensible and adaptable to evolving requirements.
 
 ---
 
-### Using the GoRESTService Actor with Authentication Logic
+#### Using the `GoRESTService` Actor with Authentication Logic
 
 Here’s how to initialize and use the updated `GoRESTService` with the `SecureTokenProvider`:
 
