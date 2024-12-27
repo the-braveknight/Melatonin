@@ -110,17 +110,35 @@ public extension MIMEType.`Type` {
     static let application: Self = "application"
     static let text: Self = "text"
     static let image: Self = "image"
+    static let audio: Self = "audio"
+    static let video: Self = "video"
 }
 
 public extension MIMEType.SubType {
     static let json: Self = "json"
     static let html: Self = "html"
     static let plain: Self = "plain"
+    static let xml: Self = "xml"
+    static let css: Self = "css"
+    static let javascript: Self = "javascript"
+    static let png: Self = "png"
+    static let jpeg: Self = "jpeg"
+    static let gif: Self = "gif"
+    static let webp: Self = "webp"
+    static let pdf: Self = "pdf"
+    static let mpeg: Self = "mpeg"
+    static let wav: Self = "wav"
+    static let avi: Self = "avi"
+    static let problemJson: Self = "problem+json"
 }
 
 public extension MIMEType.Parameter {
     static func charset(_ value: String) -> Self {
         Self(key: "charset", value: value)
+    }
+    
+    static func boundary(_ value: String) -> Self {
+        Self(key: "boundary", value: value)
     }
 }
 
@@ -141,4 +159,5 @@ public extension MIMEType {
     static let mpeg: Self = "audio/mpeg"
     static let wav: Self = "audio/wav"
     static let pdf: Self = "application/pdf"
+    static let problemJson: Self = "application/problem+json"
 }
