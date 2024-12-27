@@ -1,163 +1,239 @@
-### Melatonin
+# Melatonin
 
-Melatonin is a networking library written in Swift that provides a protocol-oriented approach to load network requests. It provides a protocol `Endpoint` to ensure that networking requests are parsed in a generic and type-safe way.
+Melatonin is a declarative HTTP request library for Swift designed to simplify and streamline the process of building and managing HTTP requests. It combines a composable design inspired by SwiftUI with type-safe networking primitives, enabling clean and reusable code.
 
-#### Endpoint Protocol
-Conformance to `Endpoint` protocol is easy and straighforward. This is how the protocol body looks like:
-```swift
-public protocol Endpoint {
-    associatedtype Response
-    associatedtype Body: HTTPBody = Empty
-    
-    var scheme: Scheme { get }
-    var host: String { get }
-    var port: Int? { get }
-    var path: String { get }
-    var method: HTTPMethod { get }
-    @QueryGroup var queries: [URLQuery] { get }
-    @HeaderGroup var headers: [HTTPHeader] { get }
-    var body: Body { get }
-    func prepare(request: inout URLRequest)
-    func parse(data: Data, urlResponse: URLResponse) throws -> Response
-}
+---
 
-```
-The library includes default implementations for some of the required variables and functions for convenience, any of which can be overriden by providing a custom implementation for it inside your endpoint object.
+## Features
 
-### Constructing the URLRequest
-Any object conforming to `Endpoint` will automatically get `url` and `request` properites which will be used by `URLSession` to load the request.
+- Declarative HTTP request building using `HTTPCall` and `Endpoint`.
+- Built-in modifiers for headers, query parameters, body, and HTTP methods.
+- `HTTPService` protocol for managing networking logic.
+- Type-safe and composable API for better readability and maintainability.
 
-You can implement the **prepare(request:)** method if you need to modify the request before it is loaded.
+---
 
-#### @Query property wrapper
-The `@Query` property wrapper is used to declare any property that is a URL query. All properties declared with `@Query` inside your endpoint's body will be added to the final url.
+## Installation
+
+To use Melatonin in your Swift project, add it as a dependency via Swift Package Manager:
 
 ```swift
-struct APIEndpoint: Endpoint {
-    ...
-    @Query(name: "name") var name: String? = "the-braveknight"
-    @Query(name: "age") var pageNumber: Int = 2
-    ...
-}
-```
-In the above code, the url query will look like this: `?name=the-braveknight&pageNumber=2`. You can still add multiple queries by directly setting the `queries` property of your endpoint.
-
-#### @Header property wrapper
-Similarly, the `@Header`property wrapper is used to declare headers, which will be added the `URLRequest` before it is loaded. The library contains multiple commonly used HTTP headers and you can also implement your own.
-
-```swift
-struct APIEndpoint: Endpoint {
-    ...
-    @Header(\.accept) var accept: MIMEType = .json
-    @Header(\.contentType) var contentType: MIMEType = .json
-    ...
-}
-```
-Again, you can still add multiple headers at once by directly setting the `headers` property of your endpoint.
-
-#### @QueryGroup & @HeaderGroup
-These result builders allow you to build arrays of query items and headers respectively. Both `queries` and `headers` array are marked with `@QueryGroup` and `@HeaderGroup` in the Endpoint protocol declaration by default. For example, here is how we can use them to build our endpoint's `queries` and `headers` arrays in a declarative way:
-```swift
-struct APIEndpoint: Endpoint {
-    ...
-    var headers: [HTTPHeader] {
-        Accept(.json)
-        ContentType(.json)
-    }
-    
-    var queries: [URLQuery] {
-        Query(name: "name", value: "the-braveknight")
-        Query(name: "age", value: 2)
-    }
-    ...
-}
+dependencies: [
+    .package(url: "https://github.com/the-braveknight/Melatonin.git", .branch("declarative-new"))
+]
 ```
 
-### Decoding the response
-In certain cases, for example when the `Response` conforms to `Decodable` and we expect to decode JSON, it would be reasonable to provide default implementation for **parse(data:urlResponse:)** method to handle that automatically.
+---
+
+## Usage
+
+### Define a Base Request (`HTTPCall`)
+
+The `HTTPCall` protocol is the foundation for HTTP requests. Base requests construct a `URLRequest` pointing to the API URL.
+
 ```swift
-public extension Endpoint where Response : Decodable {
-    func parse(data: Data, urlResponse: URLResponse) throws -> Response {
-        let decoder = JSONDecoder()
-        return try decoder.decode(Response.self, from: data)
+import Foundation
+
+struct GoRESTCall: HTTPCall {
+    func build() -> URLRequest {
+        URLRequest(url: URL(string: "https://gorest.co.in/public/v2")!)
     }
 }
 ```
-You can still provide your own implementation of this method to override this implementation.
 
-### An Example Endpoint
-This is an example endpoint with `GET` method to parse requests from [Agify.io](https://agify.io/ "Agify.io") API.
+### Create an Endpoint (`Endpoint`)
 
-The response body from an API call (https://api.agify.io/?name=bella) looks like this:
-```json
-{
-    "name" : "bella",
-    "age" : 34,
-    "count" : 40138
+The `Endpoint` protocol is used to define specific API calls. The `call` property composes the request using modifiers.
+
+```swift
+import Foundation
+
+struct GetUsers: Endpoint {
+    var call: some HTTPCall {
+        GoRESTCall()
+            .method(.get)
+            .path("/users")
+            .accept(.json)
+    }
 }
 ```
-A custom Swift struct that can contain this data would look like this:
+
+---
+
+## Creating a Service (`HTTPService`)
+
+The `Service` actor implements the `HTTPService` protocol and provides methods to perform requests and process responses.
+
+### Define the Response Model
+
 ```swift
-struct Person : Decodable {
+import Foundation
+
+struct User: Decodable {
+    let id: Int
     let name: String
-    let age: Int
-    let count: Int
-}
-```
-Finally, here is how our endpoint will look like:
-```swift
-struct AgifyAPIEndpoint : Endpoint {
-    typealias Response = Person
-    
-    let host: String = "api.agify.io"
-    let path: String = "/"
-    @Query(name: "name") var name: String? = nil
-    @Header(\.accept) var accept: MIMEType = .json
+    let email: String
+    let gender: String
+    let status: String
 }
 ```
 
-We could use the Swift dot syntax to make it more convenient to call our endpoint.
+### Implement the `Service` Actor
+
 ```swift
-extension Endpoint where Self == AgifyAPIEndpoint {
-    static func estimatedAge(forName personName: String) -> Self {
-        AgifyAPIEndpoint(name: personName)
+import Foundation
+
+actor Service: HTTPService {
+    let session: URLSession
+
+    init(session: URLSession = .shared) {
+        self.session = session
+    }
+
+    func fetchUsers() async throws -> [User] {
+        let endpoint = GetUsers()
+        let call = endpoint.call
+        let (data, _) = try await load(call)
+        return try JSONDecoder().decode([User].self, from: data)
     }
 }
 ```
-Finally, this is how we would call our endpoint. The result is of type `Result<Person, Error>`.
+
+---
+
+### Extend the Service: Adding Authentication
+
+For many APIs, authentication is required to access resources. This logic can be added incrementally to the `Service` implementation.
+
+#### Define the `TokenProvider` Protocol
+
+The `TokenProvider` protocol inherits from `Actor` to ensure thread safety and implements the `accessToken()` method for securely retrieving tokens.
+
 ```swift
-URLSession.shared.load(.estimatedAge(forName: "Zaid")) { result in
-    do {
-        let person = try result.get()
-        print("\(person.name) is probably \(person.age) years old.")
-    } catch {
-        // Handle errors
+import Foundation
+
+protocol TokenProvider: Actor {
+    func accessToken() throws -> String
+}
+```
+
+#### Update the `Service` Actor with Authentication Logic
+
+Here’s how the same `Service` actor is updated to include token management via the `TokenProvider`.
+
+```swift
+import Foundation
+
+actor Service: HTTPService {
+    let session: URLSession
+    private let tokenProvider: TokenProvider
+
+    init(session: URLSession = .shared, tokenProvider: TokenProvider) {
+        self.session = session
+        self.tokenProvider = tokenProvider
+    }
+
+    func fetchUsers() async throws -> [User] {
+        let endpoint = GetUsers()
+
+        // Retrieve the token and apply it using the .auth(.bearer) modifier
+        let token = try await tokenProvider.accessToken()
+        let callWithAuth = endpoint.call.auth(.bearer(token))
+
+        let (data, _) = try await load(callWithAuth)
+        return try JSONDecoder().decode([User].self, from: data)
     }
 }
 ```
-### Combine
-Melatonin supports loading endpoints using `Combine` framework.
+
+---
+
+## Example `TokenProvider` Implementation
+
+The `SecureTokenProvider` securely retrieves the token from a storage mechanism like the Keychain.
+
 ```swift
-let subscription: AnyCancellable = URLSession.shared.publisher(for: .estimatedAge(forName: "Zaid"))
-    .sink { completion in
-        // Handle errors
-    } receiveValue: { person in
-        print("\(person.name) is probably \(person.age) years old.")
+actor SecureTokenProvider: TokenProvider {
+    private var token: String?
+
+    func accessToken() throws -> String {
+        if let token = token {
+            return token
+        } else {
+            throw URLError(.userAuthenticationRequired)
+        }
     }
+
+    func setToken(_ newToken: String) {
+        token = newToken
+    }
+}
 ```
-### Swift Concurrency
-Melatonin also supports loading an endpoint using Swift Concurrency and `async/await`.
+
+---
+
+### Why Add Authentication?
+
+The initial `Service` implementation works for open APIs. However, when working with APIs requiring authentication, the `TokenProvider` allows secure token management without significantly altering the service’s core structure. This approach keeps the service extensible and adaptable to evolving requirements.
+
+---
+
+### Using the Service with Authentication Logic
+
+Here’s how to initialize and use the updated `Service` with the `SecureTokenProvider`:
+
 ```swift
+let tokenProvider = SecureTokenProvider()
+Task {
+    await tokenProvider.setToken("your_secure_access_token_here")
+}
+
+let service = Service(tokenProvider: tokenProvider)
+
 Task {
     do {
-        let person = try await URLSession.shared.load(.estimatedAge(forName: "Zaid"))
-        print("\(person.name) is probably \(person.age) years old.")
+        let users = try await service.fetchUsers()
+        print("Fetched users: \(users)")
     } catch {
-        // Handle errors
+        print("Error fetching users: \(error)")
     }
 }
 ```
 
-### Credits
-- John Sundell from [SwiftBySundell](https://www.swiftbysundell.com "SwiftBySundell") for the inspiration.
+---
 
+## Built-In Modifiers
+
+### HTTP Headers
+
+- `accept(_:)`: Sets the `Accept` header.
+- `contentType(_:)`: Sets the `Content-Type` header.
+- `authorization(_:)`: Adds an `Authorization` header via `.auth`.
+- `userAgent(_:)`: Sets a custom `User-Agent`.
+
+### Request Properties
+
+- `method(_:)`: Modifies the HTTP method.
+- `path(_:)`: Updates the request path.
+- `queries(_:)`: Appends query parameters to the URL.
+- `body(_:)`: Adds a request body.
+
+---
+
+## Why Melatonin?
+
+Melatonin leverages Swift’s type safety and declarative programming principles to create a robust and flexible networking library. Its composable design and extensibility make it ideal for modern Swift applications.
+
+---
+
+## Contributing
+
+Contributions are welcome! Feel free to open issues or submit pull requests to improve Melatonin.
+
+---
+
+## License
+
+Melatonin is released under the MIT License. See [LICENSE](./LICENSE) for details.
+
+---

@@ -9,12 +9,12 @@ import Foundation
 
 public protocol HTTPService: Actor {
     var session: URLSession { get }
-    func load<E: Endpoint>(_ endpoint: E) async throws -> (Data, HTTPURLResponse)
+    func load<Call: HTTPCall>(_ call: Call) async throws -> (Data, HTTPURLResponse)
 }
 
 public extension HTTPService {
-    func load<E: Endpoint>(_ endpoint: E) async throws -> (Data, HTTPURLResponse) {
-        let request = endpoint.call.build()
+    func load<Call: HTTPCall>(_ call: Call) async throws -> (Data, HTTPURLResponse) {
+        let request = call.build()
         let (data, response) = try await session.data(for: request)
         guard let response = response as? HTTPURLResponse else {
             throw URLError(.badServerResponse)

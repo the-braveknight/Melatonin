@@ -17,7 +17,8 @@ actor HTTPGoRESTService: HTTPService, GoRESTService {
     
     func loadPosts(page: Int) async throws -> PaginatedResponse<Post> {
         let endpoint = GetPosts(page: page)
-        let (data, response) = try await load(endpoint)
+        let call = endpoint.call
+        let (data, response) = try await load(call)
         let pagination = try PaginationMetadata(from: response)
         let decoder = JSONDecoder()
         let photos = try decoder.decode([Post].self, from: data)
@@ -26,7 +27,8 @@ actor HTTPGoRESTService: HTTPService, GoRESTService {
     
     func loadTodos(page: Int) async throws -> PaginatedResponse<Todo> {
         let endpoint = GetTodos(page: page)
-        let (data, response) = try await load(endpoint)
+        let call = endpoint.call
+        let (data, response) = try await load(call)
         let pagination = try PaginationMetadata(from: response)
         let decoder = JSONDecoder()
         
@@ -54,7 +56,8 @@ actor HTTPGoRESTService: HTTPService, GoRESTService {
     
     func loadUsers(page: Int) async throws -> PaginatedResponse<User> {
         let endpoint = GetUsers(page: page)
-        let (data, response) = try await load(endpoint)
+        let call = endpoint.call
+        let (data, response) = try await load(call)
         let pagination = try PaginationMetadata(from: response)
         let decoder = JSONDecoder()
         let photos = try decoder.decode([User].self, from: data)
