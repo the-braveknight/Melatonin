@@ -210,7 +210,7 @@ Task {
 ### Request Properties
 
 - `method(_:)`: Modifies the HTTP method.
-- `path(_:)`: Updates the request path.
+- `path(_:)`: Appends path to the request.
 - `queries(_:)`: Appends query parameters to the URL.
 - `body(_:)`: Adds a request body.
 

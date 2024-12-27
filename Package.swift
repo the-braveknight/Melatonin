@@ -17,18 +17,9 @@ let package = Package(
             targets: ["Melatonin"]
         ),
     ],
-    dependencies: [
-        .package(
-            url: "https://github.com/apple/swift-http-types.git",
-            from: "1.3.0"
-        )
-    ],
     targets: [
         .target(
             name: "Melatonin",
-            dependencies: [
-                .product(name: "HTTPTypes", package: "swift-http-types"),
-            ],
             path: "Sources"
         ),
     ]
