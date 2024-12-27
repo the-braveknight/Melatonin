@@ -19,7 +19,7 @@ To use Melatonin in your Swift project, add it as a dependency via Swift Package
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/the-braveknight/Melatonin.git", .branch("declarative-new"))
+    .package(url: "https://github.com/the-braveknight/Melatonin.git", from: "0.3.0")
 ]
 ```
 
