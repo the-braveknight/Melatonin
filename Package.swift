@@ -22,5 +22,10 @@ let package = Package(
             name: "Melatonin",
             path: "Sources"
         ),
+        .testTarget(
+            name: "MelatoninTests",
+            dependencies: ["Melatonin"],
+            path: "Tests"
+        )
     ]
 )

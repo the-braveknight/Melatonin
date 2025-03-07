@@ -12,8 +12,14 @@ public protocol HTTPHeader: HTTPCallModifier {
     var value: String { get }
 }
 
-extension HTTPHeader {
-    public func build(_ request: inout URLRequest) {
+public extension HTTPHeader {
+    func build(_ request: inout URLRequest) {
         request.addValue(value, forHTTPHeaderField: field)
+    }
+}
+
+public extension HTTPHeader {
+    var description: String {
+        "\(field): \(value)"
     }
 }

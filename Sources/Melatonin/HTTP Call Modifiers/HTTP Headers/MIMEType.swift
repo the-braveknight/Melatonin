@@ -8,7 +8,7 @@
 public struct MIMEType: ExpressibleByStringLiteral {
     public let type: `Type`
     public let subType: SubType
-    public let parameters: [Parameter]
+    public let parameters: [MIMETypeParameter]
     
     public var value: String {
         let value = "\(type.value)/\(subType.value)"
@@ -16,17 +16,17 @@ public struct MIMEType: ExpressibleByStringLiteral {
         if parameters.isEmpty {
             return value
         } else {
-            return "\(value);\(parameters.map(\.description).joined(separator: ";"))"
+            return "\(value);\(parameters.map(\.value).joined(separator: ";"))"
         }
     }
     
-    public init(type: Type, subType: SubType, parameters: [Parameter] = []) {
+    public init(type: Type, subType: SubType, parameters: [MIMETypeParameter] = []) {
         self.type = type
         self.subType = subType
         self.parameters = parameters
     }
     
-    public init(type: `Type`, subType: SubType, parameters: Parameter...) {
+    public init(type: `Type`, subType: SubType, parameters: MIMETypeParameter...) {
         self.init(type: type, subType: subType, parameters: parameters)
     }
     
@@ -49,7 +49,7 @@ public struct MIMEType: ExpressibleByStringLiteral {
         // Parameters parsing
         if components.indices.contains(1) {
             let parametersString = components[1]
-            self.parameters = parametersString.split(separator: ";").map { Parameter(stringLiteral: String($0)) }
+            self.parameters = parametersString.split(separator: ";").map { AnyMIMETypeParameter(stringLiteral: String($0)) }
         } else {
             self.parameters = []
         }
@@ -80,34 +80,12 @@ extension MIMEType {
             self.init(value: value)
         }
     }
-    
-    public struct Parameter: ExpressibleByStringLiteral, CustomStringConvertible {
-        public let key: String
-        public let value: String
-        
-        public var description: String {
-            "\(key)=\(value)"
-        }
-        
-        public init(key: String, value: String) {
-            self.key = key
-            self.value = value
-        }
-        
-        public init(stringLiteral value: StringLiteralType) {
-            let components = value.split(separator: "=", maxSplits: 1).map { $0.trimmingCharacters(in: .whitespaces) }
-            guard components.indices.contains(0) && components.indices.contains(1) else {
-                preconditionFailure("Invalid parameter format. Expected 'key=value'.")
-            }
-            self.key = components[0]
-            self.value = components[1]
-        }
-    }
 }
 
 // MARK: - Predefined Types and SubTypes
 public extension MIMEType.`Type` {
     static let application: Self = "application"
+    static let multipart : Self = "multipart"
     static let text: Self = "text"
     static let image: Self = "image"
     static let audio: Self = "audio"
@@ -116,6 +94,7 @@ public extension MIMEType.`Type` {
 
 public extension MIMEType.SubType {
     static let json: Self = "json"
+    static let formData: Self = "form-data"
     static let html: Self = "html"
     static let plain: Self = "plain"
     static let xml: Self = "xml"
@@ -130,16 +109,6 @@ public extension MIMEType.SubType {
     static let wav: Self = "wav"
     static let avi: Self = "avi"
     static let problemJson: Self = "problem+json"
-}
-
-public extension MIMEType.Parameter {
-    static func charset(_ value: String) -> Self {
-        Self(key: "charset", value: value)
-    }
-    
-    static func boundary(_ value: String) -> Self {
-        Self(key: "boundary", value: value)
-    }
 }
 
 public extension MIMEType {
@@ -160,4 +129,91 @@ public extension MIMEType {
     static let wav: Self = "audio/wav"
     static let pdf: Self = "application/pdf"
     static let problemJson: Self = "application/problem+json"
+}
+
+public protocol MIMETypeParameter {
+    var value: String { get }
+}
+
+public struct Name: MIMETypeParameter {
+    public let name: String
+    
+    public var value: String {
+        "name=\"\(name)\""
+    }
+    
+    init(_ name: String) {
+        self.name = name
+    }
+}
+
+public extension MIMETypeParameter where Self == Name {
+    static func name(_ name: String) -> Self {
+        Self(name)
+    }
+}
+
+public struct Filename: MIMETypeParameter {
+    public let filename: String
+    public let encoding: Encoding?
+    
+    public enum Encoding: String {
+        case utf8
+    }
+    
+    public var value: String {
+        switch encoding {
+        case .utf8:
+            return "filename*=UTF-8''\(filename)"
+            
+        case nil:
+            return "filename=\"\(filename)\""
+        }
+    }
+    
+    public init(_ filename: String, encoding: Encoding?) {
+        self.filename = filename
+        self.encoding = encoding
+    }
+}
+
+public extension MIMETypeParameter where Self == Filename {
+    static func filename(_ filename: String, encoding: Filename.Encoding? = nil) -> Self {
+        Self(filename, encoding: encoding)
+    }
+}
+
+public struct Boundary: MIMETypeParameter {
+    public let boundary: String
+    
+    public var value: String {
+        "boundary=\"\(boundary)\""
+    }
+    
+    public init(_ boundary: String) {
+        self.boundary = boundary
+    }
+}
+
+public extension MIMETypeParameter where Self == Boundary {
+    static func boundary(_ boundary: String) -> Self {
+        Self(boundary)
+    }
+}
+
+public struct AnyMIMETypeParameter: MIMETypeParameter, ExpressibleByStringLiteral {
+    public let value: String
+    
+    public init(key: String, value: String) {
+        self.value = "\(key)=\(value)"
+    }
+    
+    public init(stringLiteral value: StringLiteralType) {
+        let components = value.split(separator: "=", maxSplits: 1).map { $0.trimmingCharacters(in: .whitespaces) }
+        guard components.indices.contains(0) && components.indices.contains(1) else {
+            preconditionFailure("Invalid parameter format. Expected 'key=value'.")
+        }
+        
+        self.init(key: components[0], value: components[1])
+    }
 }
