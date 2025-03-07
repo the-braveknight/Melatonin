@@ -129,7 +129,7 @@ public struct File: MultiPartFormField {
     }
 }
 
-extension HTTPCall {
+public extension HTTPCall {
     func multiPartForm(boundary: String, @ArrayBuilder<MultiPartFormField> fields: () -> [MultiPartFormField]) -> some HTTPCall {
         let mimeType = MIMEType(type: .multipart, subType: .formData, parameters: [Boundary(boundary)])
         return contentType(mimeType).modifier(MultiPartForm(boundary: boundary, fields: fields))
