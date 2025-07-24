@@ -7,6 +7,6 @@
 
 import Foundation
 
-public protocol HTTPCallModifier {
+public protocol HTTPCallModifier: Sendable {
     func build(_ request: inout URLRequest)
 }

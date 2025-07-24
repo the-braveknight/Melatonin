@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Query {
+public struct Query: Sendable {
     public let name: String
     public let value: String?
     

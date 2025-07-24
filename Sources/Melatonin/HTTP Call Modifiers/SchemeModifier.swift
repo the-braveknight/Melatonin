@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Scheme: ExpressibleByStringLiteral {
+public struct Scheme: ExpressibleByStringLiteral, Sendable {
     public var rawValue: String
     
     public init(rawValue: String) {

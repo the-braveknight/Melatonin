@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - Endpoint Protocol
 /// Endpoint protocol
-public protocol Endpoint {
+public protocol Endpoint: Sendable {
     associatedtype Call: HTTPCall
     var call: Call { get }
 }

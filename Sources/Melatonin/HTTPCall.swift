@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol HTTPCall {
+public protocol HTTPCall: Sendable {
     func build() -> URLRequest
 }
 

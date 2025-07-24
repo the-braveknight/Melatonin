@@ -19,7 +19,7 @@ public struct HTTPMethodModifier: HTTPCallModifier {
     }
 }
 
-public struct HTTPMethod: ExpressibleByStringLiteral {
+public struct HTTPMethod: ExpressibleByStringLiteral, Sendable {
     let value: String
     
     init(_ value: String) {

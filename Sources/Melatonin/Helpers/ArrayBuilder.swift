@@ -8,7 +8,7 @@
 import Foundation
 
 @resultBuilder
-public struct ArrayBuilder<Element> {
+public struct ArrayBuilder<Element>: Sendable {
     public static func buildExpression(_ element: Element) -> [Element] {
         return [element]
     }
