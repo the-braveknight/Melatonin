@@ -14,7 +14,7 @@ public protocol HTTPHeader: HTTPCallModifier {
 
 public extension HTTPHeader {
     func build(_ request: inout URLRequest) {
-        request.addValue(value, forHTTPHeaderField: field)
+        request.setValue(value, forHTTPHeaderField: field)
     }
 }
 
